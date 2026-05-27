@@ -1,3 +1,4 @@
-# Off-Campus Quiz
+# Bookverse Quiz
+Dostępne: Off-Campus 
+https://tinyurl.com/35zrun5p
 
-Minimalna wersja frontendu z lokalnymi grafikami w folderze assets.
