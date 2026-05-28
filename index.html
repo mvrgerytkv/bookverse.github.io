@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quizy osobowości — Off-Campus, Gra o tron i Ród smoka</title>
+  <title>Quizy osobowości — Off-Campus, Gra o tron, Ród smoka i Rycerz Siedmiu Królestw</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
@@ -60,12 +60,12 @@
       letter-spacing:.14em;
       margin-bottom:18px;
     }
-    .home-title{font-size:clamp(2.5rem,5vw,4.3rem);max-width:12ch;margin-bottom:14px}
-    .home-lead{color:var(--muted);max-width:60ch;font-size:1.05rem;line-height:1.6;margin-bottom:28px}
+    .home-title{font-size:clamp(2.5rem,5vw,4.3rem);max-width:13ch;margin-bottom:14px}
+    .home-lead{color:var(--muted);max-width:66ch;font-size:1.05rem;line-height:1.6;margin-bottom:28px}
 
     .universe-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:repeat(2,1fr);
       gap:16px;
     }
     .universe-card{
@@ -126,7 +126,7 @@
       flex-direction:column;
       justify-content:center;
     }
-    .intro-title{font-size:clamp(2.1rem,4vw,3.4rem);margin-bottom:12px;max-width:12ch}
+    .intro-title{font-size:clamp(2.1rem,4vw,3.4rem);margin-bottom:12px;max-width:14ch}
     .intro-lead{color:var(--muted);line-height:1.65;max-width:54ch;margin-bottom:28px}
     .intro-actions{display:flex;flex-wrap:wrap;gap:12px}
 
@@ -243,7 +243,6 @@
       <div class="home-body">
         <div class="eyebrow">Quiz Hub · Bookverse</div>
         <h1 class="home-title">Wybierz uniwersum i sprawdź, która postać najbardziej do Ciebie pasuje</h1>
-        <p class="home-lead"></p>
         <div class="universe-grid" id="universe-grid"></div>
       </div>
     </div>
@@ -537,6 +536,127 @@
             { t:'Rzucenia się w wir intensywnego życia.', s:'W ruchu czuję się najbardziej sobą.', pts:{ daemon:3, rhaenyra:1 } },
             { t:'Uporządkowania wszystkiego wokół.', s:'Potrzebuję struktury i wpływu.', pts:{ alicent:3, corlys:1 } },
             { t:'Zbudowania dziedzictwa, z którego będę dumna.', s:'Chcę czegoś większego niż tylko teraźniejszość.', pts:{ corlys:3, rhaenys:1 } }
+          ]}
+        ]
+      },
+
+      knight: {
+        key: 'knight',
+        badge: 'Quiz IV',
+        title: 'Rycerz Siedmiu Królestw',
+        subtitle: 'wędrówka · honor · turnieje · Westeros',
+        intro: 'Ten quiz jest bardziej kameralny i rycerski niż pozostałe światy Westeros. Liczą się tu honor, droga, intuicja, odwaga, charakter i to, jak odnajdujesz się między prostotą a wielkością.',
+        preview: ['Dunk', 'Egg', 'Baelor', 'Lyonel', 'Maekar', 'Daeron'],
+        characters: {
+          dunk: {
+            name: 'Duncan the Tall',
+            short: 'Dunk',
+            image: './dunk.jpg',
+            traits: ['Honorowy','Prostolinijny','Lojalny','Odważny'],
+            desc: 'Najbliżej Ci do Dunka, jeśli kierujesz się sercem, uczciwością i instynktownym poczuciem tego, co słuszne.',
+            extra: 'Nie musisz być najbardziej błyskotliwa w pomieszczeniu, żeby budzić zaufanie. Twoją siłą jest charakter i przyzwoitość.'
+          },
+          egg: {
+            name: 'Egg',
+            short: 'Egg',
+            image: './egg.jpg',
+            traits: ['Bystry','Ciekawy','Sprytny','Lojalny'],
+            desc: 'Najbliżej Ci do Egga, jeśli masz szybki umysł, dużą ciekawość świata i umiesz uczyć się z każdej sytuacji.',
+            extra: 'Łączysz lekkość z inteligencją. Potrafisz być pozornie niepozorna, a jednocześnie widzieć więcej niż inni.'
+          },
+          baelor: {
+            name: 'Baelor Targaryen',
+            short: 'Baelor',
+            image: './baelor.jpg',
+            traits: ['Szlachetny','Opanowany','Sprawiedliwy','Dostojny'],
+            desc: 'Najbliżej Ci do Baelora, jeśli cenisz honor, odpowiedzialność i wielkość, która nie potrzebuje ostentacji.',
+            extra: 'Masz w sobie spokojny autorytet i naturalną godność. Ludzie mogą widzieć w Tobie kogoś, komu warto zaufać.'
+          },
+          maekar: {
+            name: 'Maekar Targaryen',
+            short: 'Maekar',
+            image: './maekar.jpg',
+            traits: ['Surowy','Zdyscyplinowany','Twardy','Poważny'],
+            desc: 'Najbliżej Ci do Maekara, jeśli cenisz dyscyplinę, siłę i konkret bardziej niż ciepłe słowa i miękkie gesty.',
+            extra: 'Bywasz wymagająca, ale stoi za tym powaga i poczucie obowiązku. Nie imponują Ci pozory.'
+          },
+          lyonel: {
+            name: 'Lyonel Baratheon',
+            short: 'Lyonel',
+            image: './lyonel.jpg',
+            traits: ['Charyzmatyczny','Żywiołowy','Odważny','Towarzyski'],
+            desc: 'Najbliżej Ci do Lyonela, jeśli masz w sobie energię, swobodę i naturalny magnetyzm, który przyciąga ludzi.',
+            extra: 'Lubisz ruch, atmosferę i mocne wejścia. Wnosisz do otoczenia życie, pewność siebie i odrobinę brawury.'
+          },
+          daeron: {
+            name: 'Daeron Targaryen',
+            short: 'Daeron',
+            image: './daeron.jpg',
+            traits: ['Wrażliwy','Intuicyjny','Niejednoznaczny','Refleksyjny'],
+            desc: 'Najbliżej Ci do Daerona, jeśli masz bogate życie wewnętrzne i częściej działasz pod wpływem przeczuć niż twardych zasad.',
+            extra: 'Jest w Tobie coś trudnego do uchwycenia. Możesz wydawać się miękka albo rozproszona, ale widzisz i czujesz więcej, niż pokazujesz.'
+          }
+        },
+        questions: [
+          { p:'Co robi na Tobie największe wrażenie w drugim człowieku?', h:'Wybierz odpowiedź, która najbardziej do Ciebie pasuje.', a:[
+            { t:'Uczciwość i prosty kręgosłup moralny.', s:'Wolę prawdziwy charakter niż błyskotliwą fasadę.', pts:{ dunk:3, baelor:1 } },
+            { t:'Bystry umysł i żywą ciekawość.', s:'Najbardziej lubię ludzi, którzy szybko łączą fakty.', pts:{ egg:3, daeron:1 } },
+            { t:'Godność i opanowanie.', s:'Spokój pod presją jest dla mnie imponujący.', pts:{ baelor:3, maekar:1 } },
+            { t:'Charyzmę i energię.', s:'Lubię ludzi, którzy naprawdę wchodzą do pokoju z rozmachem.', pts:{ lyonel:3, dunk:1 } }
+          ]},
+          { p:'Gdy trafiasz w nowe środowisko, zwykle…', h:'Pomyśl o pierwszym naturalnym odruchu.', a:[
+            { t:'Próbuję zachować się porządnie i uczciwie.', s:'Nie chcę zaczynać od gry.', pts:{ dunk:3, baelor:1 } },
+            { t:'Obserwuję i szybko się uczę zasad.', s:'Najpierw chcę zrozumieć układ.', pts:{ egg:3, daeron:1 } },
+            { t:'Trzymam fason i dystans.', s:'Nie odsłaniam się od razu.', pts:{ baelor:3, maekar:1 } },
+            { t:'Wchodzę z energią i rozmową.', s:'Lubię od razu czuć atmosferę.', pts:{ lyonel:3, dunk:1 } }
+          ]},
+          { p:'Najtrudniej jest Ci zaakceptować…', h:'Która rzecz najmocniej Cię uwiera?', a:[
+            { t:'Niesprawiedliwość wobec słabszych.', s:'To uruchamia mnie natychmiast.', pts:{ dunk:3, baelor:1 } },
+            { t:'Bycie lekceważoną.', s:'Nie lubię, gdy ktoś uznaje mnie za mniej ważną.', pts:{ egg:3, maekar:1 } },
+            { t:'Chaos i brak zasad.', s:'Potrzebuję porządku, żeby działać.', pts:{ maekar:3, baelor:1 } },
+            { t:'Nudę i brak intensywności.', s:'Lubię, gdy coś się dzieje.', pts:{ lyonel:3, daeron:1 } }
+          ]},
+          { p:'Twoja największa siła to…', h:'Wybierz to, co najbardziej rozpoznajesz w sobie.', a:[
+            { t:'Przyzwoitość.', s:'Nawet jeśli popełniam błędy, chcę być fair.', pts:{ dunk:3, baelor:1 } },
+            { t:'Spryt i szybkie myślenie.', s:'Umiem znaleźć drogę nawet w trudnej sytuacji.', pts:{ egg:3, daeron:1 } },
+            { t:'Powaga i odpowiedzialność.', s:'Ludzie wiedzą, że traktuję sprawy serio.', pts:{ maekar:3, baelor:1 } },
+            { t:'Magnetyzm i pewność siebie.', s:'Potrafię porwać atmosferę za sobą.', pts:{ lyonel:3, dunk:1 } }
+          ]},
+          { p:'Jak reagujesz pod presją?', h:'Wybierz odpowiedź najbliższą prawdzie.', a:[
+            { t:'Robię to, co wydaje się słuszne, nawet jeśli nieidealne.', s:'Nie zawsze wiem wszystko, ale działam sercem.', pts:{ dunk:3, egg:1 } },
+            { t:'Myślę szybko i kombinuję.', s:'Lubię znajdować wyjście z sytuacji.', pts:{ egg:3, daeron:1 } },
+            { t:'Usztywniam się i pilnuję dyscypliny.', s:'Kontrola daje mi bezpieczeństwo.', pts:{ maekar:3, baelor:1 } },
+            { t:'Idę w energię i odwagę.', s:'Lepiej wejść w to mocno niż się wahać.', pts:{ lyonel:3, dunk:1 } }
+          ]},
+          { p:'Jaką rolę najczęściej pełnisz w grupie?', h:'Pomyśl, jak widzą Cię inni.', a:[
+            { t:'Osoby, na której można polegać.', s:'Może nie błyszczę, ale jestem solidna.', pts:{ dunk:3, baelor:1 } },
+            { t:'Tej, która wszystko zauważa.', s:'Widzę więcej, niż pokazuję.', pts:{ egg:3, daeron:1 } },
+            { t:'Naturalnego autorytetu.', s:'Ludzie liczą się z moim zdaniem.', pts:{ baelor:3, maekar:1 } },
+            { t:'Silnej osobowości, która ożywia towarzystwo.', s:'Wnoszę ruch i śmiałość.', pts:{ lyonel:3, dunk:1 } }
+          ]},
+          { p:'Najbardziej pociąga Cię wizja życia opartego na…', h:'Który kierunek brzmi dla Ciebie najlepiej?', a:[
+            { t:'Honorze i prostocie.', s:'Wolę uczciwe życie niż wielką pozę.', pts:{ dunk:3, baelor:1 } },
+            { t:'Przygodzie i poznawaniu świata.', s:'Chcę się uczyć i doświadczać.', pts:{ egg:3, lyonel:1 } },
+            { t:'Obowiązku i porządku.', s:'Dobra struktura daje mi siłę.', pts:{ maekar:3, baelor:1 } },
+            { t:'Wolności i intensywności.', s:'Lubię czuć, że żyję naprawdę.', pts:{ daeron:3, lyonel:1 } }
+          ]},
+          { p:'W relacjach najbardziej cenisz…', h:'Co jest dla Ciebie najważniejsze?', a:[
+            { t:'Lojalność i uczciwość.', s:'Bez tego nic nie ma sensu.', pts:{ dunk:3, baelor:1 } },
+            { t:'Porozumienie i błysk w rozmowie.', s:'Lubię ludzi, z którymi można naprawdę myśleć.', pts:{ egg:3, daeron:1 } },
+            { t:'Szacunek i granice.', s:'Bliskość nie wyklucza powagi.', pts:{ maekar:3, baelor:1 } },
+            { t:'Swobodę i żywą energię.', s:'Relacja musi mieć w sobie ruch.', pts:{ lyonel:3, dunk:1 } }
+          ]},
+          { p:'Gdy ktoś Cię źle oceni, najczęściej…', h:'Co dzieje się w Tobie najpierw?', a:[
+            { t:'Boli mnie to, ale wolę udowodnić prawdę czynem.', s:'Nie lubię pustych kłótni.', pts:{ dunk:3, baelor:1 } },
+            { t:'Zapamiętuję to i analizuję.', s:'Chcę zrozumieć, skąd to się wzięło.', pts:{ egg:3, daeron:1 } },
+            { t:'Zamykam się i staję się chłodniejsza.', s:'Nie pokazuję łatwo, że coś mnie dotknęło.', pts:{ maekar:3, daeron:1 } },
+            { t:'Reaguję mocniej, niż inni się spodziewają.', s:'Nie lubię, gdy ktoś mnie lekceważy.', pts:{ lyonel:3, maekar:1 } }
+          ]},
+          { p:'Nowy etap życia chciałabyś zacząć od…', h:'Która wizja jest Ci najbliższa?', a:[
+            { t:'Życia bardziej zgodnego z wartościami.', s:'Chcę czuć, że jestem po właściwej stronie siebie.', pts:{ dunk:3, baelor:1 } },
+            { t:'Uczenia się i odkrywania nowych rzeczy.', s:'Najbardziej ekscytuje mnie rozwój.', pts:{ egg:3, daeron:1 } },
+            { t:'Uporządkowania tego, co chaotyczne.', s:'Chcę większej struktury i stabilności.', pts:{ maekar:3, baelor:1 } },
+            { t:'Mocnego wejścia w życie, które naprawdę mnie porwie.', s:'Nie chcę już tkwić w stagnacji.', pts:{ lyonel:3, daeron:1 } }
           ]}
         ]
       }
