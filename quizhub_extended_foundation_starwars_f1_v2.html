@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quizy osobowości — Bookverse Quiz Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --bg-soft:#edf2f7;
+      --card:#ffffff;
+      --line:#d6e0ea;
+      --text:#13202d;
+      --muted:#5c6d7d;
+      --accent:#2e6f96;
+      --accent-dark:#215674;
+      --accent-soft:#deebf4;
+      --shadow:0 20px 48px rgba(12,32,48,.09);
+      --pill:999px;
+      --radius:28px;
+
+      --u-accent:#2e6f96;
+      --u-accent-dark:#215674;
+      --u-soft:#deebf4;
+      --u-grad-1:#ffffff;
+      --u-grad-2:#f8fbfe;
+      --u-highlight:#f3f7fb;
+    }
+
+    body[data-theme="dark"]{
+      --bg:#11161c;
+      --bg-soft:#1a2129;
+      --card:#171d24;
+      --line:#2a3542;
+      --text:#e8eef5;
+      --muted:#a4b0bd;
+      --accent:#8fb7d1;
+      --accent-dark:#b5d0e1;
+      --accent-soft:#22303b;
+      --shadow:0 20px 48px rgba(0,0,0,.34);
+    }
+
+    body[data-universe="offcampus"]{
+      --u-accent:#b86b8f;
+      --u-accent-dark:#9d5276;
+      --u-soft:#f8e4ee;
+      --u-grad-1:#fffafc;
+      --u-grad-2:#fff2f7;
+      --u-highlight:#fdf1f6;
+    }
+    body[data-theme="dark"][data-universe="offcampus"]{
+      --u-accent:#d79ab5;
+      --u-accent-dark:#ebc3d4;
+      --u-soft:#33232b;
+      --u-grad-1:#1c171b;
+      --u-grad-2:#241c21;
+      --u-highlight:#2b2026;
+    }
+    body[data-universe="got"]{
+      --u-accent:#8b2f3f;
+      --u-accent-dark:#6f2230;
+      --u-soft:#f1dde2;
+      --u-grad-1:#fffafb;
+      --u-grad-2:#f9ecef;
+      --u-highlight:#f7ecef;
+    }
+    body[data-theme="dark"][data-universe="got"]{
+      --u-accent:#c27b87;
+      --u-accent-dark:#d9a5ad;
+      --u-soft:#311f24;
+      --u-grad-1:#1b1719;
+      --u-grad-2:#241c1f;
+      --u-highlight:#2b2124;
+    }
+    body[data-universe="hotd"]{
+      --u-accent:#9b3b2f;
+      --u-accent-dark:#7d2f25;
+      --u-soft:#f4e0db;
+      --u-grad-1:#fff9f7;
+      --u-grad-2:#faece8;
+      --u-highlight:#f8eeeb;
+    }
+    body[data-theme="dark"][data-universe="hotd"]{
+      --u-accent:#cf8a7c;
+      --u-accent-dark:#e1aea4;
+      --u-soft:#34231f;
+      --u-grad-1:#1c1716;
+      --u-grad-2:#251d1b;
+      --u-highlight:#2b211f;
+    }
+    body[data-universe="knight"]{
+      --u-accent:#8a6a2c;
+      --u-accent-dark:#715523;
+      --u-soft:#f2ead7;
+      --u-grad-1:#fffdf8;
+      --u-grad-2:#f8f2e5;
+      --u-highlight:#faf6eb;
+    }
+    body[data-theme="dark"][data-universe="knight"]{
+      --u-accent:#c7ab72;
+      --u-accent-dark:#dbc79c;
+      --u-soft:#332b1f;
+      --u-grad-1:#1d1915;
+      --u-grad-2:#26211b;
+      --u-highlight:#2c261f;
+    }
+
+    body[data-universe="foundation"]{
+      --u-accent:#5d6fb3;
+      --u-accent-dark:#465694;
+      --u-soft:#e3e8fb;
+      --u-grad-1:#f8f9ff;
+      --u-grad-2:#eef1fb;
+      --u-highlight:#f1f4ff;
+    }
+    body[data-theme="dark"][data-universe="foundation"]{
+      --u-accent:#a7b4ea;
+      --u-accent-dark:#c8d1f5;
+      --u-soft:#252b40;
+      --u-grad-1:#171a24;
+      --u-grad-2:#1d2230;
+      --u-highlight:#212738;
+    }
+    body[data-universe="starwars"]{
+      --u-accent:#8e6a20;
+      --u-accent-dark:#6f5319;
+      --u-soft:#f4ead0;
+      --u-grad-1:#fffdf8;
+      --u-grad-2:#f8f1e3;
+      --u-highlight:#faf4e8;
+    }
+    body[data-theme="dark"][data-universe="starwars"]{
+      --u-accent:#d7bf79;
+      --u-accent-dark:#ead9a6;
+      --u-soft:#332a1c;
+      --u-grad-1:#1a1713;
+      --u-grad-2:#221d17;
+      --u-highlight:#29231b;
+    }
+    body[data-universe="f1"]{
+      --u-accent:#c43b33;
+      --u-accent-dark:#9f2f29;
+      --u-soft:#f8dfdd;
+      --u-grad-1:#fff8f8;
+      --u-grad-2:#fbecec;
+      --u-highlight:#fdf1f0;
+    }
+    body[data-theme="dark"][data-universe="f1"]{
+      --u-accent:#e28a84;
+      --u-accent-dark:#efb1ac;
+      --u-soft:#341f1d;
+      --u-grad-1:#1c1515;
+      --u-grad-2:#251a1a;
+      --u-highlight:#2b1f1e;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'Inter',system-ui,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      padding:24px 12px 56px;
+      transition:background .2s ease,color .2s ease;
+    }
+    h1,h2,h3{font-family:'DM Serif Display',Georgia,serif;line-height:1.08}
+    img{display:block;max-width:100%}
+    button{font:inherit;cursor:pointer}
+
+    .topbar{
+      width:min(1080px,100%);
+      margin:0 auto 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .topbar-left{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .topbar-right{display:flex;gap:10px;flex-wrap:wrap}
+    .switcher{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--card);
+      box-shadow:var(--shadow);
+    }
+    body[data-theme="dark"] .switcher{
+      background:#171d24;
+      border-color:#2b3642;
+    }
+    .switcher button{
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+    }
+    .switcher button.active{
+      background:var(--u-soft);
+      color:var(--u-accent-dark);
+    }
+
+    .step{display:none;width:min(1080px,100%);margin:0 auto;animation:fadeIn .24s ease}
+    .step.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .home-body{padding:46px 42px 38px}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 14px;
+      border-radius:999px;
+      background:var(--u-soft);
+      color:var(--u-accent-dark);
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      margin-bottom:18px;
+    }
+    .home-title{font-size:clamp(2.5rem,5vw,4.3rem);max-width:13ch;margin-bottom:14px}
+    .home-lead{color:var(--muted);max-width:68ch;font-size:1.05rem;line-height:1.6;margin-bottom:28px}
+
+    .universe-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:16px;
+    }
+    .universe-card{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:22px 20px;
+      background:linear-gradient(180deg,var(--u-grad-1) 0%,var(--u-grad-2) 100%);
+      transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+      cursor:pointer;
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .universe-card:hover{
+      transform:translateY(-4px);
+      border-color:var(--u-accent);
+      box-shadow:0 18px 40px rgba(12,32,48,.12);
+    }
+    .universe-badge{
+      display:inline-flex;
+      width:max-content;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--u-soft);
+      color:var(--u-accent-dark);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .universe-title{font-size:1.8rem;margin-bottom:10px}
+    .universe-subtitle{color:var(--muted);line-height:1.55;font-size:.97rem;margin-bottom:18px}
+    .chip-row{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--u-highlight);
+      font-size:13px;
+      font-weight:700;
+      color:var(--text);
+    }
+
+    body[data-theme="dark"] .universe-card{
+      background:#171d24;
+      border:1px solid #2b3642;
+    }
+    body[data-theme="dark"] .universe-title{
+      color:#eef3f8;
+    }
+    body[data-theme="dark"] .universe-subtitle{
+      color:#aeb9c4;
+    }
+    body[data-theme="dark"] .universe-badge{
+      background:#222d37;
+      color:#c5d7e5;
+      border:1px solid #313d4a;
+    }
+    body[data-theme="dark"] .chip{
+      background:#1e2630;
+      border:1px solid #313d4a;
+      color:#d9e3ec;
+    }
+    body[data-theme="dark"] .universe-card:hover{
+      border-color:#425263;
+      box-shadow:0 18px 40px rgba(0,0,0,.32);
+    }
+
+    .intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:0;align-items:stretch}
+    .intro-main{padding:42px 40px 34px}
+    .intro-side{
+      background:linear-gradient(180deg,var(--u-grad-1) 0%,var(--u-grad-2) 100%);
+      border-left:1px solid var(--line);
+      padding:30px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .intro-title{font-size:clamp(2.1rem,4vw,3.4rem);margin-bottom:12px;max-width:14ch}
+    .intro-lead{color:var(--muted);line-height:1.65;max-width:54ch;margin-bottom:28px}
+    .intro-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+    .btn-primary,.btn-secondary,.btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      padding:16px 28px;
+      font-weight:800;
+      border:none;
+      transition:transform .14s ease,background .14s ease,border-color .14s ease,color .14s ease;
+    }
+    .btn-primary{background:var(--u-accent);color:#fff;box-shadow:0 12px 28px rgba(27,106,150,.18)}
+    .btn-primary:hover{background:var(--u-accent-dark);transform:translateY(-1px)}
+    .btn-secondary,.btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+    .btn-secondary:hover,.btn-ghost:hover{border-color:var(--u-accent);color:var(--u-accent)}
+
+    .character-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .character-card{display:grid;gap:8px}
+    .portrait{
+      aspect-ratio:3/4;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:var(--bg-soft);
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .portrait img{width:100%;height:100%;object-fit:cover}
+    .portrait.missing::after{
+      content:attr(data-label);
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:12px;
+      color:var(--muted);
+      font-weight:800;
+      font-size:1rem;
+      letter-spacing:.02em;
+      background:linear-gradient(180deg,var(--u-grad-1) 0%,var(--u-grad-2) 100%);
+    }
+    .character-name{text-align:center;font-size:13px;font-weight:700;color:var(--muted)}
+
+    .quiz-body{padding:40px 42px 34px}
+    .progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;font-weight:700;color:var(--muted)}
+    .progress-track{height:8px;background:var(--bg-soft);border-radius:999px;overflow:hidden;margin-bottom:30px}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--u-soft),var(--u-accent));border-radius:inherit;transition:width .24s ease}
+    .q-label{color:var(--u-accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;margin-bottom:12px}
+    .q-title{font-size:clamp(1.45rem,2.4vw,2rem);font-weight:800;line-height:1.26;margin-bottom:10px}
+    .q-hint{color:var(--muted);font-size:.96rem;margin-bottom:26px}
+    .answers{display:grid;gap:10px}
+    .answer{
+      width:100%;
+      text-align:left;
+      background:var(--card);
+      border:1.5px solid var(--line);
+      border-radius:18px;
+      padding:18px 18px 16px;
+      font-weight:700;
+      color:var(--text);
+      transition:border-color .14s ease,box-shadow .14s ease,transform .14s ease;
+    }
+    .answer:hover,.answer:focus-visible{
+      outline:none;
+      border-color:var(--u-accent);
+      box-shadow:0 8px 24px rgba(12,32,48,.08);
+      transform:translateY(-1px);
+    }
+    body[data-theme="dark"] .answer:hover,
+    body[data-theme="dark"] .answer:focus-visible{
+      box-shadow:0 10px 24px rgba(0,0,0,.24);
+    }
+    .answer span{display:block;margin-top:5px;font-size:13.5px;font-weight:500;color:var(--muted)}
+
+    .result-grid{display:grid;grid-template-columns:300px 1fr}
+    .result-media{background:var(--u-grad-2);min-height:100%}
+    body[data-theme="dark"] .result-media{border-right:1px solid var(--line)}
+    .result-media .portrait{height:100%;min-height:100%;border:none;border-radius:0;aspect-ratio:auto;background:transparent}
+    .result-body{padding:40px 40px 34px}
+    .result-name{font-size:clamp(2.1rem,3vw,3.1rem);margin-bottom:12px}
+    .result-desc,.result-extra{color:var(--muted);line-height:1.68}
+    .result-desc{margin-bottom:14px}
+    .result-extra{margin-bottom:20px;font-size:.97rem}
+    .traits{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+    .trait{padding:9px 13px;border-radius:999px;border:1px solid var(--line);background:var(--u-highlight);font-size:13px;font-weight:700}
+    .score-list{display:grid;gap:12px;margin-top:10px}
+    .score-item{display:grid;gap:6px}
+    .score-head{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--text)}
+    .score-track{height:8px;background:var(--bg-soft);border-radius:999px;overflow:hidden}
+    .score-fill{height:100%;background:linear-gradient(90deg,var(--u-soft),var(--u-accent));border-radius:inherit}
+    .result-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+
+    @media(max-width:980px){
+      .universe-grid{grid-template-columns:1fr}
+      .intro-grid,.result-grid{grid-template-columns:1fr}
+      .intro-side{border-left:none;border-top:1px solid var(--line)}
+    }
+    @media(max-width:680px){
+      .home-body,.intro-main,.quiz-body,.result-body{padding:28px 20px 24px}
+      .intro-side{padding:22px 20px}
+      .character-grid{grid-template-columns:repeat(2,1fr)}
+      .result-media .portrait{aspect-ratio:4/3}
+      .topbar{align-items:stretch}
+    }
+  </style>
+</head>
+<body data-theme="light" data-universe="home">
+  <div class="topbar">
+    <div class="topbar-left" id="brand-label">Bookverse Quiz Hub</div>
+    <div class="topbar-right">
+      <div class="switcher" aria-label="Language switcher">
+        <button id="lang-pl" class="active" onclick="setLanguage('pl')">PL</button>
+        <button id="lang-en" onclick="setLanguage('en')">EN</button>
+      </div>
+      <div class="switcher" aria-label="Theme switcher">
+        <button id="theme-light" class="active" onclick="setTheme('light')">Light</button>
+        <button id="theme-dark" onclick="setTheme('dark')">Dark</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="step active" id="step-home">
+    <div class="card">
+      <div class="home-body">
+        <div class="eyebrow" id="home-eyebrow"></div>
+        <h1 class="home-title" id="home-title"></h1>
+        <p class="home-lead" id="home-lead"></p>
+        <div class="universe-grid" id="universe-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="step-intro">
+    <div class="card intro-grid">
+      <div class="intro-main">
+        <div class="eyebrow" id="intro-badge"></div>
+        <h2 class="intro-title" id="intro-title"></h2>
+        <p class="intro-lead" id="intro-lead"></p>
+        <div class="intro-actions">
+          <button class="btn-primary" id="start-btn" onclick="startQuiz()"></button>
+          <button class="btn-secondary" id="back-btn" onclick="goHome()"></button>
+        </div>
+      </div>
+      <div class="intro-side">
+        <div class="character-grid" id="intro-characters"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="step-quiz">
+    <div class="card">
+      <div class="quiz-body">
+        <div class="progress-row">
+          <span id="q-counter"></span>
+          <span id="q-pct">0%</span>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+        <div id="question-area"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="step-result">
+    <div class="card result-grid">
+      <div class="result-media">
+        <div class="portrait" id="result-portrait" data-label="Wynik">
+          <img id="result-img" src="" alt="Quiz result" onerror="handleMissingImage(this)">
+        </div>
+      </div>
+      <div class="result-body">
+        <div class="eyebrow" id="result-badge"></div>
+        <h2 class="result-name" id="result-name"></h2>
+        <p class="result-desc" id="result-desc"></p>
+        <div class="traits" id="result-traits"></div>
+        <p class="result-extra" id="result-extra"></p>
+        <div id="role-box" style="display:none;margin-bottom:22px;padding:18px 18px 16px;border:1px solid var(--line);border-radius:20px;background:var(--u-highlight)">
+          <div class="eyebrow" id="role-title" style="margin-bottom:12px"></div>
+          <h3 id="role-name" style="margin-bottom:10px"></h3>
+          <p id="role-lead" class="result-extra" style="margin-bottom:10px"></p>
+          <p id="role-desc" class="result-desc" style="margin-bottom:10px"></p>
+          <div class="traits" id="role-traits" style="margin-bottom:10px"></div>
+          <p id="role-extra" class="result-extra" style="margin-bottom:0"></p>
+        </div>
+        <div>
+          <h3 id="score-title"></h3>
+          <div class="score-list" id="score-list"></div>
+        </div>
+        <div class="result-actions">
+          <button class="btn-primary" id="restart-btn" onclick="restartCurrentQuiz()"></button>
+          <button class="btn-ghost" id="choose-btn" onclick="goHome()"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const UI = {
+      pl: {
+        title: 'Quizy osobowości — Bookverse Quiz Hub',
+        brand: 'Bookverse Quiz Hub',
+        homeEyebrow: 'Quiz Hub · Bookverse',
+        homeTitle: 'Wybierz quiz i sprawdź swój wynik',
+        homeLead: 'Siedem światów, siedem różnych klimatów i osobne wyniki',
+        start: 'Rozpocznij quiz',
+        back: 'Wróć do wyboru',
+        questionOf: 'Pytanie {current} z {total}',
+        questionLabel: '{title} · Pytanie {current}',
+        scoreTitle: 'Rozkład punktów',
+        replay: 'Zagraj jeszcze raz',
+        chooseAnother: 'Wybierz inny quiz',
+        resultLabel: '{title} · Twój wynik',
+        tieText: ' Twój wynik jest bardzo wyrównany, więc masz w sobie też wyraźny rys drugiej postaci.',
+        resultText: ' To właśnie ta postać najmocniej wybrzmiała w Twoich odpowiedziach.',
+        points: 'pkt',
+        light: 'Light',
+        dark: 'Dark'
+      },
+      en: {
+        title: 'Personality Quizzes — Bookverse Quiz Hub',
+        brand: 'Bookverse Quiz Hub',
+        homeEyebrow: 'Quiz Hub · Bookverse',
+        homeTitle: 'Choose a quiz and see your result',
+        homeLead: 'Seven worlds, seven different moods, and separate results',
+        start: 'Start quiz',
+        back: 'Back to selection',
+        questionOf: 'Question {current} of {total}',
+        questionLabel: '{title} · Question {current}',
+        scoreTitle: 'Score breakdown',
+        replay: 'Play again',
+        chooseAnother: 'Choose another quiz',
+        resultLabel: '{title} · Your result',
+        tieText: ' Your score is very close, so you also show a strong trace of the runner-up character.',
+        resultText: ' This is the character that came through most strongly in your answers.',
+        points: 'pts',
+        light: 'Light',
+        dark: 'Dark'
+      }
+    };
+
+    const QUIZZES = {
+      offcampus: {
+        previewLimit: 4,
+        pl: {
+          badge: 'Quiz I',
+          title: 'Off-Campus',
+          subtitle: 'romans · college · emocje · relacje',
+          intro: 'Odpowiedz na pytania o emocje, zaufanie, bliskość i ambicję. Wynik pokaże, która bohaterka Off-Campus najbardziej pasuje do Twojego temperamentu.',
+          preview: ['Hannah', 'Grace', 'Sabrina', 'Allie'],
+          characters: {
+            hannah: { name: 'Hannah Wells', short: 'Hannah', image: './hannah.jpg', traits: ['Wrażliwa','Uważna','Inteligentna','Autentyczna'], desc: 'Najbliżej Ci do Hannah, jeśli cenisz spokój, autentyczność i emocjonalną głębię. Zanim się otworzysz, chcesz czuć bezpieczeństwo i prawdziwe zrozumienie.', extra: 'Twoją siłą nie jest hałas, tylko uważność. Najwięcej znaczą dla Ciebie relacje, w których możesz być sobą bez gry i bez presji.' },
+            grace: { name: 'Grace Ivers', short: 'Grace', image: './grace.jpg', traits: ['Delikatna','Empatyczna','Wytrwała','Ciepła'], desc: 'Najbliżej Ci do Grace, jeśli masz w sobie łagodność, która nie oznacza braku siły. Potrafisz długo dojrzewać do decyzji, lecz gdy odnajdziesz siebie, jesteś bardzo konsekwentna.', extra: 'W Twoim sposobie bycia jest dużo miękkości, ale też odporności. Uczysz się relacji powoli, za to bardzo głęboko.' },
+            sabrina: { name: 'Sabrina James', short: 'Sabrina', image: './sabrina.jpg', traits: ['Ambitna','Zdyscyplinowana','Niezależna','Silna'], desc: 'Najbliżej Ci do Sabriny, jeśli najważniejsze są dla Ciebie sprawczość, cel i niezależność. Nawet gdy czujesz dużo, nie pokazujesz wszystkiego od razu.', extra: 'Masz wysoki próg wytrzymałości i nie lubisz oddawać swojego życia przypadkowi. Bliskość jest dla Ciebie ważna, ale tylko wtedy, gdy nie odbiera Ci podmiotowości.' },
+            allie: { name: 'Allie Hayes', short: 'Allie', image: './allie.jpg', traits: ['Towarzyska','Serdeczna','Żywiołowa','Lojalna'], desc: 'Najbliżej Ci do Allie, jeśli relacje, energia i emocjonalna szczerość są w centrum Twojego świata. Dobrze czujesz ludzi i wnosisz do ich życia ciepło i bliskość.', extra: 'Potrafisz być spontaniczna, ale za tą lekkością stoi prawdziwe przywiązanie. Gdy kochasz, robisz to całym sercem.' }
+          },
+          questions: [
+            { p:'Gdy stajesz przed ważną decyzją życiową, co jest dla Ciebie najważniejsze?', h:'Wybierz to, co brzmi najbardziej naturalnie.', a:[
+              { t:'Bezpieczeństwo i niezależność.', s:'Muszę wiedzieć, że ten wybór mnie wzmacnia.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Wierność sobie i swoim wartościom.', s:'Nie chcę wygrywać czegoś kosztem siebie.', pts:{ hannah:3, grace:1 } },
+              { t:'Wpływ decyzji na relacje z bliskimi.', s:'Nie oddzielam wyborów od ludzi.', pts:{ allie:3, grace:1 } },
+              { t:'To, czy wybieram odważnie, a nie ze strachu.', s:'Chcę czuć, że naprawdę idę do przodu.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'Kiedy ktoś Cię rani, najczęściej…', h:'Pomyśl o swoim pierwszym odruchu.', a:[
+              { t:'Wycofuję się i potrzebuję czasu.', s:'Zaufanie odbudowuję powoli.', pts:{ hannah:3, grace:1 } },
+              { t:'Rozmawiam od razu.', s:'Wolę wyjaśnić niż dusić emocje.', pts:{ allie:3, hannah:1 } },
+              { t:'Analizuję, czy ta relacja w ogóle jest dla mnie dobra.', s:'Nie chcę inwestować w coś, co mnie osłabia.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Próbuję zrozumieć, ale długo to noszę w sobie.', s:'Empatia nie wyklucza bólu.', pts:{ grace:3, allie:1 } }
+            ]},
+            { p:'Twoją największą siłą w relacjach jest…', h:'Wybierz cechę, którą w sobie najbardziej rozpoznajesz.', a:[
+              { t:'Uważność i szczerość.', s:'Ludzie czują, że naprawdę ich słucham.', pts:{ hannah:3, grace:1 } },
+              { t:'Ciepło i obecność.', s:'Wnoszę energię i bliskość.', pts:{ allie:3, hannah:1 } },
+              { t:'Stabilność i samodzielność.', s:'Nie gubię siebie nawet w silnych emocjach.', pts:{ sabrina:3, grace:1 } },
+              { t:'Łagodność i wyrozumiałość.', s:'Nie oceniam pochopnie.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'W nowym środowisku zwykle…', h:'Nie chodzi o ideał, tylko o prawdziwy odruch.', a:[
+              { t:'Najpierw obserwuję.', s:'Wolę najpierw wyczuć ludzi.', pts:{ hannah:3, grace:1 } },
+              { t:'Szukam jednej bezpiecznej osoby.', s:'Potrzebuję miękkiego wejścia.', pts:{ grace:3, allie:1 } },
+              { t:'Od razu nawiązuję kontakt.', s:'Lepiej czuję się w ruchu niż w zawieszeniu.', pts:{ allie:3, hannah:1 } },
+              { t:'Skupiam się na celu i zadaniu.', s:'Nie potrzebuję aprobaty, żeby działać.', pts:{ sabrina:3, hannah:1 } }
+            ]},
+            { p:'Najtrudniejsze w bliskości jest dla Ciebie…', h:'Wybierz odpowiedź, która najmocniej Cię dotyka.', a:[
+              { t:'Zaufanie bez gwarancji, że nie zostanę zraniona.', s:'Bezpieczeństwo jest dla mnie kluczowe.', pts:{ hannah:3, grace:1 } },
+              { t:'Oddanie komuś kontroli nad tym, co czuję.', s:'Nie lubię odsłaniać słabości za szybko.', pts:{ sabrina:3, hannah:1 } },
+              { t:'To, że czuję wszystko bardzo intensywnie.', s:'Moje emocje bywają ogromne.', pts:{ allie:3, grace:1 } },
+              { t:'Uwierzenie, że naprawdę zasługuję na miłość.', s:'Bliskość uruchamia we mnie także lęk.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'Kiedy jesteś przeciążona, zwykle…', h:'Pomyśl, co robisz najpierw.', a:[
+              { t:'Próbuję jeszcze mocniej wszystko ogarnąć.', s:'Kontrola daje mi poczucie bezpieczeństwa.', pts:{ sabrina:3, grace:1 } },
+              { t:'Szukam ciszy i przestrzeni.', s:'Muszę wrócić do siebie.', pts:{ hannah:3, grace:1 } },
+              { t:'Idę do bliskiej osoby.', s:'Rozmowa pomaga mi odzyskać równowagę.', pts:{ allie:3, hannah:1 } },
+              { t:'Najpierw to przeczekuję, potem się otwieram.', s:'Nie pokazuję wszystkiego od razu.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'Co najbardziej chcesz chronić w swojej przyszłości?', h:'To pytanie o Twój rdzeń.', a:[
+              { t:'Niezależność.', s:'Nie chcę być od nikogo życiowo zależna.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Wrażliwość i uczciwość wobec siebie.', s:'Nie chcę twardnieć na siłę.', pts:{ hannah:3, grace:1 } },
+              { t:'Zdolność kochania ludzi otwarcie.', s:'Nie chcę zamknąć serca.', pts:{ allie:3, grace:1 } },
+              { t:'Spokój i łagodność wobec siebie.', s:'Chcę mniej lęku, więcej oddechu.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'Kiedy masz rację, ale jej wypowiedzenie może zranić kogoś bliskiego…', h:'Jak reagujesz najczęściej?', a:[
+              { t:'Mówię wprost.', s:'Prawda jest ważniejsza niż pozorny spokój.', pts:{ sabrina:3, allie:1 } },
+              { t:'Szukam delikatnego sposobu.', s:'Chcę być uczciwa, ale nie okrutna.', pts:{ hannah:3, grace:1 } },
+              { t:'Najpierw myślę o konsekwencjach dla relacji.', s:'Liczy się dla mnie nie tylko co, ale też jak.', pts:{ allie:3, hannah:1 } },
+              { t:'Długo układam to w sobie.', s:'Konflikt kosztuje mnie więcej, niż pokazuję.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'Najbardziej porusza Cię, gdy ktoś…', h:'Wybierz odpowiedź najbardziej „Twoją”.', a:[
+              { t:'Naprawdę widzi Twoje wnętrze.', s:'Bycie rozumianą jest dla mnie bezcenne.', pts:{ hannah:3, grace:1 } },
+              { t:'Wspiera Cię bez odbierania sprawczości.', s:'Pomoc ma wzmacniać, nie przejmować sterów.', pts:{ sabrina:3, grace:1 } },
+              { t:'Daje ciepło i codzienną obecność.', s:'Miłość lubię czuć w prostych rzeczach.', pts:{ allie:3, hannah:1 } },
+              { t:'Jest cierpliwy, gdy uczysz się ufać.', s:'Bezpieczeństwo buduje się we mnie powoli.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'Nowy etap życia chciałabyś zacząć od…', h:'Wybierz najbardziej kuszącą wizję.', a:[
+              { t:'Pełnej sprawczości.', s:'Chcę sama ustalać warunki swojego życia.', pts:{ sabrina:3, grace:1 } },
+              { t:'Autentyczności.', s:'Chcę żyć bez ukrywania siebie.', pts:{ hannah:3, grace:1 } },
+              { t:'Relacji, które dają ciepło i wspólnotę.', s:'Sens rodzi się dla mnie we współobecności.', pts:{ allie:3, hannah:1 } },
+              { t:'Odzyskanego spokoju.', s:'Chcę budować życie bez ciągłego napięcia.', pts:{ grace:3, hannah:1 } }
+            ]}
+          ]
+        },
+        en: {
+          badge: 'Quiz I', title: 'Off-Campus', subtitle: 'romance · college · emotions · relationships', intro: 'Answer questions about emotions, trust, closeness, and ambition. Your result will show which Off-Campus heroine best matches your temperament.', preview: ['Hannah', 'Grace', 'Sabrina', 'Allie'],
+          characters: {
+            hannah: { name: 'Hannah Wells', short: 'Hannah', image: './hannah.jpg', traits: ['Sensitive','Attentive','Intelligent','Authentic'], desc: 'You are closest to Hannah if you value calm, authenticity, and emotional depth. Before you open up, you need to feel safe and truly understood.', extra: 'Your strength is not noise but attentiveness. What matters most to you are relationships where you can be yourself without pressure.' },
+            grace: { name: 'Grace Ivers', short: 'Grace', image: './grace.jpg', traits: ['Gentle','Empathetic','Steady','Warm'], desc: 'You are closest to Grace if you carry softness that does not mean weakness. You may take time to grow into your choices, but once you find yourself, you become deeply consistent.', extra: 'There is tenderness in the way you move through the world, but also resilience. You learn closeness slowly and deeply.' },
+            sabrina: { name: 'Sabrina James', short: 'Sabrina', image: './sabrina.jpg', traits: ['Ambitious','Disciplined','Independent','Strong'], desc: 'You are closest to Sabrina if agency, purpose, and independence matter most to you. Even when you feel deeply, you do not reveal everything right away.', extra: 'You have a high threshold for pressure and do not like leaving your life to chance. Closeness matters to you only if it does not take away your autonomy.' },
+            allie: { name: 'Allie Hayes', short: 'Allie', image: './allie.jpg', traits: ['Social','Warm','Lively','Loyal'], desc: 'You are closest to Allie if relationships, energy, and emotional honesty are at the center of your world. You read people well and bring warmth and closeness into their lives.', extra: 'You can be spontaneous, but beneath that lightness there is real attachment. When you love, you do it wholeheartedly.' }
+          },
+          questions: [
+            { p:'When you face an important life decision, what matters most to you?', h:'Choose what feels most natural.', a:[
+              { t:'Security and independence.', s:'I need to know this choice makes me stronger.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Staying true to myself and my values.', s:'I do not want to win something at the cost of myself.', pts:{ hannah:3, grace:1 } },
+              { t:'How the decision affects my close relationships.', s:'I do not separate choices from people.', pts:{ allie:3, grace:1 } },
+              { t:'Whether I am choosing bravely rather than out of fear.', s:'I want to feel that I am truly moving forward.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'When someone hurts you, you usually…', h:'Think of your first instinct.', a:[
+              { t:'Withdraw and need time.', s:'Trust comes back slowly for me.', pts:{ hannah:3, grace:1 } },
+              { t:'Talk about it right away.', s:'I would rather clear it up than bottle it up.', pts:{ allie:3, hannah:1 } },
+              { t:'Analyze whether the relationship is even good for me.', s:'I do not want to invest in something that weakens me.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Try to understand it, but carry it for a long time.', s:'Empathy does not cancel pain.', pts:{ grace:3, allie:1 } }
+            ]},
+            { p:'Your greatest strength in relationships is…', h:'Choose the trait you recognize most in yourself.', a:[
+              { t:'Attentiveness and honesty.', s:'People feel that I truly listen.', pts:{ hannah:3, grace:1 } },
+              { t:'Warmth and presence.', s:'I bring energy and closeness.', pts:{ allie:3, hannah:1 } },
+              { t:'Stability and self-reliance.', s:'I do not lose myself even in strong emotions.', pts:{ sabrina:3, grace:1 } },
+              { t:'Gentleness and understanding.', s:'I do not judge too quickly.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'In a new environment, you usually…', h:'This is about your real instinct, not the ideal version.', a:[
+              { t:'Observe first.', s:'I prefer to get a feel for people.', pts:{ hannah:3, grace:1 } },
+              { t:'Look for one safe person.', s:'I need a softer entry.', pts:{ grace:3, allie:1 } },
+              { t:'Start connecting right away.', s:'I feel better in motion than in suspension.', pts:{ allie:3, hannah:1 } },
+              { t:'Focus on the goal and the task.', s:'I do not need approval to act.', pts:{ sabrina:3, hannah:1 } }
+            ]},
+            { p:'The hardest thing about closeness for you is…', h:'Choose the answer that hits you most deeply.', a:[
+              { t:'Trusting without a guarantee I will not be hurt.', s:'Safety is essential for me.', pts:{ hannah:3, grace:1 } },
+              { t:'Giving someone control over what I feel.', s:'I do not like revealing weakness too quickly.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Feeling everything very intensely.', s:'My emotions can be huge.', pts:{ allie:3, grace:1 } },
+              { t:'Believing I truly deserve love.', s:'Closeness also activates fear in me.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'When you are overwhelmed, you usually…', h:'Think about what you do first.', a:[
+              { t:'Try to manage everything even harder.', s:'Control gives me a sense of safety.', pts:{ sabrina:3, grace:1 } },
+              { t:'Look for silence and space.', s:'I need to return to myself.', pts:{ hannah:3, grace:1 } },
+              { t:'Go to a close person.', s:'Talking helps me regain balance.', pts:{ allie:3, hannah:1 } },
+              { t:'Wait it out first, then open up.', s:'I do not show everything immediately.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'What do you most want to protect in your future?', h:'This question is about your core.', a:[
+              { t:'Independence.', s:'I do not want to be dependent on anyone.', pts:{ sabrina:3, hannah:1 } },
+              { t:'Sensitivity and honesty toward myself.', s:'I do not want to harden just to survive.', pts:{ hannah:3, grace:1 } },
+              { t:'The ability to love people openly.', s:'I do not want to close my heart.', pts:{ allie:3, grace:1 } },
+              { t:'Peace and gentleness toward myself.', s:'I want less fear and more breathing room.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'When you are right but saying it might hurt someone close to you…', h:'How do you usually react?', a:[
+              { t:'I say it directly.', s:'Truth matters more than surface peace.', pts:{ sabrina:3, allie:1 } },
+              { t:'I look for a gentle way.', s:'I want to be honest but not cruel.', pts:{ hannah:3, grace:1 } },
+              { t:'I think first about the effect on the relationship.', s:'For me it is not just what but how.', pts:{ allie:3, hannah:1 } },
+              { t:'I carry it inside for a while.', s:'Conflict costs me more than I show.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'You are most moved when someone…', h:'Choose the answer that feels most like you.', a:[
+              { t:'Truly sees your inner world.', s:'Being understood means everything to me.', pts:{ hannah:3, grace:1 } },
+              { t:'Supports you without taking away your agency.', s:'Help should strengthen me, not take over.', pts:{ sabrina:3, grace:1 } },
+              { t:'Offers warmth and everyday presence.', s:'I like love to show up in simple things.', pts:{ allie:3, hannah:1 } },
+              { t:'Is patient while you learn to trust.', s:'Safety builds slowly in me.', pts:{ grace:3, hannah:1 } }
+            ]},
+            { p:'You would like to begin a new chapter of life with…', h:'Choose the vision that attracts you most.', a:[
+              { t:'Full agency.', s:'I want to set the terms of my own life.', pts:{ sabrina:3, grace:1 } },
+              { t:'Authenticity.', s:'I want to live without hiding myself.', pts:{ hannah:3, grace:1 } },
+              { t:'Relationships that bring warmth and community.', s:'For me, meaning grows through togetherness.', pts:{ allie:3, hannah:1 } },
+              { t:'Recovered peace.', s:'I want to build a life without constant tension.', pts:{ grace:3, hannah:1 } }
+            ]}
+          ]
+        }
+      },
+      got: {
+        previewLimit: 6,
+        pl: {
+          badge:'Quiz II', title:'Gra o tron', subtitle:'władza · przetrwanie · lojalność · strategia', intro:'Ten quiz opiera się na pytaniach o władzę, przetrwanie, ambicję, lojalność i sposób działania pod presją. Wynik pokaże, która ikoniczna postać z Gry o tron jest Ci najbliższa.', preview:['Daenerys','Jon','Arya','Sansa','Tyrion','Cersei'],
+          characters:{
+            daenerys:{name:'Daenerys Targaryen',short:'Daenerys',image:'./daenerys.jpg',traits:['Charyzmatyczna','Ognista','Sprawcza','Idealistyczna'],desc:'Najbliżej Ci do Daenerys, jeśli naturalnie ciągnie Cię do przywództwa, zmian i wielkich wizji. Umiesz pociągać ludzi za sobą i trudno Ci przejść obojętnie obok niesprawiedliwości.',extra:'Masz w sobie połączenie serca i siły. Kiedy w coś wierzysz, idziesz za tym odważnie i z rozmachem.'},
+            jon:{name:'Jon Snow',short:'Jon',image:'./jon.jpg',traits:['Lojalny','Honorowy','Cichy','Odpowiedzialny'],desc:'Najbliżej Ci do Jona, jeśli w kryzysie najpierw myślisz o obowiązku i ochronie innych. Nie potrzebujesz hałasu wokół siebie, żeby mieć autorytet.',extra:'Ludzie ufają Ci dlatego, że jesteś stała i uczciwa. Nawet gdy masz wątpliwości, próbujesz robić to, co uważasz za słuszne.'},
+            arya:{name:'Arya Stark',short:'Arya',image:'./arya.jpg',traits:['Niezależna','Buntownicza','Odważna','Nieprzewidywalna'],desc:'Najbliżej Ci do Aryi, jeśli cenisz wolność bardziej niż oczekiwania innych. Nie boisz się iść własną ścieżką, nawet gdy nikt wokół jej nie rozumie.',extra:'Masz mocny instynkt i dużą odporność. Najlepiej działasz wtedy, gdy możesz być całkowicie sobą.'},
+            sansa:{name:'Sansa Stark',short:'Sansa',image:'./sansa.jpg',traits:['Strategiczna','Opanowana','Wytrwała','Uważna'],desc:'Najbliżej Ci do Sansy, jeśli uczysz się świata przez obserwację, cierpliwość i analizę ludzi. Potrafisz przetrwać trudne rzeczy bez utraty godności.',extra:'Twoją siłą nie musi być krzyk. Czasem największą przewagą jest umiejętność patrzenia dalej niż inni.'},
+            tyrion:{name:'Tyrion Lannister',short:'Tyrion',image:'./tyrion.jpg',traits:['Błyskotliwy','Refleksyjny','Cyniczny','Empatyczny'],desc:'Najbliżej Ci do Tyriona, jeśli cenisz inteligencję, ironię i zdolność widzenia świata z wielu stron. Nawet w chaosie próbujesz myśleć jasno.',extra:'Masz umysł, który nie lubi prostych odpowiedzi. Potrafisz łączyć dystans z prawdziwym zrozumieniem ludzi.'},
+            cersei:{name:'Cersei Lannister',short:'Cersei',image:'./cersei.jpg',traits:['Dumna','Kontrolująca','Silna','Polityczna'],desc:'Najbliżej Ci do Cersei, jeśli nie oddajesz kontroli łatwo i bardzo poważnie traktujesz lojalność wobec własnego kręgu. Wiesz, że świat bywa brutalny, więc nauczyłaś się być twarda.',extra:'Masz silny instynkt przetrwania i ogromną wolę. Nie lubisz bezradności i wolisz działać, niż czekać na cudzą decyzję.'}
+          },
+          questions:[
+            { p:'Władza jest dla Ciebie przede wszystkim…', h:'Wybierz odpowiedź, która wydaje Ci się najbardziej naturalna.', a:[
+              { t:'Narzędziem do zmiany świata.', s:'Jeśli mam wpływ, chcę robić nim coś ważnego.', pts:{ daenerys:3, jon:1 } },
+              { t:'Odpowiedzialnością, której nie można lekko traktować.', s:'Najpierw myślę o konsekwencjach.', pts:{ jon:3, sansa:1 } },
+              { t:'Czymś, czego nie warto oddawać w cudze ręce.', s:'Bez kontroli łatwo zostać zniszczoną.', pts:{ cersei:3, sansa:1 } },
+              { t:'Grą wpływów, którą trzeba rozumieć.', s:'Najpierw obserwuję układ sił.', pts:{ tyrion:3, sansa:1 } }
+            ]},
+            { p:'Kiedy ktoś Cię lekceważy, co robisz najczęściej?', h:'Pomyśl o pierwszym odruchu.', a:[
+              { t:'Udowadniam swoją wartość czynami.', s:'Nie potrzebuję pustych deklaracji.', pts:{ jon:3, arya:1 } },
+              { t:'Zapamiętuję to i czekam na właściwy moment.', s:'Nie reaguję impulsywnie, ale niczego nie zapominam.', pts:{ sansa:3, cersei:1 } },
+              { t:'Odpowiadam ostro i bez cofania się.', s:'Nie pozwalam się spychać.', pts:{ daenerys:3, cersei:1 } },
+              { t:'Używam ironii albo inteligencji.', s:'Czasem słowa są ostrzejsze niż miecz.', pts:{ tyrion:3, arya:1 } }
+            ]},
+            { p:'Najbardziej cenisz w sobie…', h:'Wybierz to, co uważasz za swój najmocniejszy rdzeń.', a:[
+              { t:'Lojalność.', s:'Nie porzucam swoich ludzi.', pts:{ jon:3, daenerys:1 } },
+              { t:'Niezależność.', s:'Muszę mieć własną drogę.', pts:{ arya:3, daenerys:1 } },
+              { t:'Umiejętność czytania ludzi.', s:'Widzę więcej, niż pokazuję.', pts:{ sansa:3, tyrion:1 } },
+              { t:'Silną wolę.', s:'Gdy coś postanowię, trudno mnie zatrzymać.', pts:{ cersei:3, daenerys:1 } }
+            ]},
+            { p:'W kryzysie najczęściej stawiasz na…', h:'Co uruchamia się w Tobie pierwsze?', a:[
+              { t:'Odważne działanie.', s:'Czasem trzeba po prostu ruszyć naprzód.', pts:{ daenerys:3, arya:1 } },
+              { t:'Poczucie obowiązku.', s:'Najpierw trzeba zrobić to, co słuszne.', pts:{ jon:3, sansa:1 } },
+              { t:'Analizę i plan.', s:'Bez chłodnej głowy łatwo przegrać.', pts:{ tyrion:3, sansa:1 } },
+              { t:'Utrzymanie przewagi.', s:'W kryzysie nie można okazać słabości.', pts:{ cersei:3, tyrion:1 } }
+            ]},
+            { p:'Najbardziej boisz się…', h:'Wybierz stratę, która najmocniej Cię dotyka.', a:[
+              { t:'Utraty ludzi, których kochasz.', s:'Bliscy są moim punktem odniesienia.', pts:{ jon:3, daenerys:1 } },
+              { t:'Utraty siebie i swojej wolności.', s:'Nie chcę żyć cudzym scenariuszem.', pts:{ arya:3, jon:1 } },
+              { t:'Utraty wpływu na własny los.', s:'Bez sprawczości czuję się bezradna.', pts:{ cersei:3, sansa:1 } },
+              { t:'Utraty rozsądku w chaosie emocji.', s:'Muszę widzieć obraz całości.', pts:{ tyrion:3, sansa:1 } }
+            ]},
+            { p:'Kiedy ktoś potrzebuje Twojej pomocy…', h:'Jak reagujesz najczęściej?', a:[
+              { t:'Biorę odpowiedzialność.', s:'Nawet jeśli mnie to kosztuje.', pts:{ jon:3, daenerys:1 } },
+              { t:'Pomagam, jeśli to zgodne z moim wewnętrznym kodeksem.', s:'Nie robię nic tylko dlatego, że „wypada”.', pts:{ arya:3, jon:1 } },
+              { t:'Szukam najlepszego rozwiązania strategicznego.', s:'Dobra pomoc musi być skuteczna.', pts:{ tyrion:3, sansa:1 } },
+              { t:'Pomagam przede wszystkim swoim.', s:'Lojalność ma dla mnie krąg.', pts:{ cersei:3, daenerys:1 } }
+            ]},
+            { p:'Twoja relacja z autorytetem wygląda tak, że…', h:'Wybierz najbliższą Ci opcję.', a:[
+              { t:'Szanuję go, jeśli zasługuje.', s:'Sama pozycja nic dla mnie nie znaczy.', pts:{ jon:3, arya:1 } },
+              { t:'Nie mam problemu go podważyć.', s:'Jeśli coś jest niesprawiedliwe, reaguję.', pts:{ daenerys:3, arya:1 } },
+              { t:'Rozumiem, że autorytet trzeba także umieć budować.', s:'To bardziej złożone niż tylko posłuszeństwo.', pts:{ sansa:3, tyrion:1 } },
+              { t:'Wolę sama być po stronie decydującej.', s:'Nie lubię zależności od cudzych kaprysów.', pts:{ cersei:3, daenerys:1 } }
+            ]},
+            { p:'Najbardziej pociąga Cię wizja…', h:'Która przyszłość brzmi dla Ciebie najmocniej?', a:[
+              { t:'Wielkiej zmiany.', s:'Chcę zostawić po sobie ślad.', pts:{ daenerys:3, jon:1 } },
+              { t:'Życia zgodnego z honorem.', s:'Spokój daje mi uczciwość wobec siebie.', pts:{ jon:3, sansa:1 } },
+              { t:'Pełnej niezależności.', s:'Chcę sama wybierać swoją drogę.', pts:{ arya:3, daenerys:1 } },
+              { t:'Pozycji, z której nic mnie nie zepchnie.', s:'Bezpieczeństwo daje mi siła.', pts:{ cersei:3, sansa:1 } }
+            ]},
+            { p:'W relacjach najbardziej cenisz…', h:'Co jest dla Ciebie fundamentem?', a:[
+              { t:'Wierność i oddanie.', s:'Bez tego trudno mi naprawdę zaufać.', pts:{ jon:3, cersei:1 } },
+              { t:'Wolność bycia sobą.', s:'Nie chcę być zamknięta w cudzych oczekiwaniach.', pts:{ arya:3, daenerys:1 } },
+              { t:'Wzajemny szacunek i inteligencję.', s:'Bliskość bez zrozumienia mnie nie satysfakcjonuje.', pts:{ tyrion:3, sansa:1 } },
+              { t:'Lojalność wobec wspólnego celu.', s:'Relacja musi coś realnie wytrzymać.', pts:{ daenerys:3, jon:1 } }
+            ]},
+            { p:'Gdy zaczynasz nowy etap, chcesz przede wszystkim…', h:'Jaką energię wnosisz na start?', a:[
+              { t:'Przejąć ster.', s:'Wiem, dokąd chcę iść.', pts:{ daenerys:3, cersei:1 } },
+              { t:'Zrobić to właściwie.', s:'Wolę wolniej, ale uczciwie.', pts:{ jon:3, sansa:1 } },
+              { t:'Pójść własną drogą.', s:'Nie chcę być wpisana w cudzy plan.', pts:{ arya:3, jon:1 } },
+              { t:'Rozeznać układ i ustawić pionki.', s:'Najpierw chcę zrozumieć pole gry.', pts:{ tyrion:3, sansa:1 } }
+            ]}
+          ]
+        },
+        en: {
+          badge:'Quiz II', title:'Game of Thrones', subtitle:'power · survival · loyalty · strategy', intro:'This quiz focuses on power, survival, ambition, loyalty, and the way you act under pressure. Your result will show which iconic Game of Thrones character is closest to you.', preview:['Daenerys','Jon','Arya','Sansa','Tyrion','Cersei'],
+          characters:{
+            daenerys:{name:'Daenerys Targaryen',short:'Daenerys',image:'./daenerys.jpg',traits:['Charismatic','Fiery','Driven','Idealistic'],desc:'You are closest to Daenerys if you naturally gravitate toward leadership, change, and big visions. You can inspire people and find it hard to ignore injustice.',extra:'You carry both heart and strength. When you believe in something, you pursue it boldly and on a grand scale.'},
+            jon:{name:'Jon Snow',short:'Jon',image:'./jon.jpg',traits:['Loyal','Honorable','Quiet','Responsible'],desc:'You are closest to Jon if, in crisis, you think first about duty and protecting others. You do not need noise around you to have authority.',extra:'People trust you because you are steady and honest. Even when you doubt yourself, you try to do what you believe is right.'},
+            arya:{name:'Arya Stark',short:'Arya',image:'./arya.jpg',traits:['Independent','Rebellious','Brave','Unpredictable'],desc:'You are closest to Arya if you value freedom more than other people’s expectations. You are not afraid to follow your own path even when nobody understands it.',extra:'You have strong instincts and a lot of resilience. You work best when you can be fully yourself.'},
+            sansa:{name:'Sansa Stark',short:'Sansa',image:'./sansa.jpg',traits:['Strategic','Composed','Resilient','Observant'],desc:'You are closest to Sansa if you learn about the world through observation, patience, and reading people. You can survive difficult things without losing your dignity.',extra:'Your strength does not need to be loud. Sometimes the greatest advantage is seeing further than others do.'},
+            tyrion:{name:'Tyrion Lannister',short:'Tyrion',image:'./tyrion.jpg',traits:['Witty','Reflective','Cynical','Empathetic'],desc:'You are closest to Tyrion if you value intelligence, irony, and the ability to see the world from many angles. Even in chaos, you try to think clearly.',extra:'Your mind does not like simple answers. You can combine distance with real understanding of people.'},
+            cersei:{name:'Cersei Lannister',short:'Cersei',image:'./cersei.jpg',traits:['Proud','Controlling','Strong','Political'],desc:'You are closest to Cersei if you do not surrender control easily and take loyalty to your inner circle very seriously. You know the world can be brutal, so you learned to be hard.',extra:'You have a strong survival instinct and tremendous willpower. You dislike helplessness and would rather act than wait for someone else to decide.'}
+          },
+          questions:[
+            { p:'Power is, above all, for you…', h:'Choose the answer that feels most natural.', a:[
+              { t:'A tool for changing the world.', s:'If I have influence, I want to use it for something meaningful.', pts:{ daenerys:3, jon:1 } },
+              { t:'A responsibility that cannot be taken lightly.', s:'I think about consequences first.', pts:{ jon:3, sansa:1 } },
+              { t:'Something not worth handing over to others.', s:'Without control, it is easy to be destroyed.', pts:{ cersei:3, sansa:1 } },
+              { t:'A game of influence that must be understood.', s:'First, I observe the balance of power.', pts:{ tyrion:3, sansa:1 } }
+            ]},
+            { p:'When someone underestimates you, what do you usually do?', h:'Think of your first instinct.', a:[
+              { t:'I prove my worth through actions.', s:'I do not need empty declarations.', pts:{ jon:3, arya:1 } },
+              { t:'I remember it and wait for the right moment.', s:'I am not impulsive, but I do not forget.', pts:{ sansa:3, cersei:1 } },
+              { t:'I answer sharply and do not back down.', s:'I do not let myself be pushed aside.', pts:{ daenerys:3, cersei:1 } },
+              { t:'I use irony or intelligence.', s:'Sometimes words are sharper than swords.', pts:{ tyrion:3, arya:1 } }
+            ]},
+            { p:'What do you value most in yourself?', h:'Choose what feels like your strongest core.', a:[
+              { t:'Loyalty.', s:'I do not abandon my people.', pts:{ jon:3, daenerys:1 } },
+              { t:'Independence.', s:'I need my own path.', pts:{ arya:3, daenerys:1 } },
+              { t:'The ability to read people.', s:'I see more than I show.', pts:{ sansa:3, tyrion:1 } },
+              { t:'Strong will.', s:'When I decide something, I am hard to stop.', pts:{ cersei:3, daenerys:1 } }
+            ]},
+            { p:'In a crisis, you usually rely on…', h:'What appears first in you?', a:[
+              { t:'Bold action.', s:'Sometimes you simply have to move forward.', pts:{ daenerys:3, arya:1 } },
+              { t:'A sense of duty.', s:'First you do what is right.', pts:{ jon:3, sansa:1 } },
+              { t:'Analysis and planning.', s:'Without a cool head, it is easy to lose.', pts:{ tyrion:3, sansa:1 } },
+              { t:'Maintaining your advantage.', s:'In crisis, you cannot show weakness.', pts:{ cersei:3, tyrion:1 } }
+            ]},
+            { p:'What do you fear most?', h:'Choose the loss that hits you hardest.', a:[
+              { t:'Losing the people I love.', s:'The people close to me are my reference point.', pts:{ jon:3, daenerys:1 } },
+              { t:'Losing myself and my freedom.', s:'I do not want to live someone else’s script.', pts:{ arya:3, jon:1 } },
+              { t:'Losing control over my own fate.', s:'Without agency, I feel helpless.', pts:{ cersei:3, sansa:1 } },
+              { t:'Losing reason in emotional chaos.', s:'I need to see the full picture.', pts:{ tyrion:3, sansa:1 } }
+            ]},
+            { p:'When someone needs your help…', h:'How do you usually react?', a:[
+              { t:'I take responsibility.', s:'Even if it costs me something.', pts:{ jon:3, daenerys:1 } },
+              { t:'I help if it matches my inner code.', s:'I do not act just because it is expected.', pts:{ arya:3, jon:1 } },
+              { t:'I look for the most effective solution.', s:'Good help should work in practice.', pts:{ tyrion:3, sansa:1 } },
+              { t:'I mainly help my own people.', s:'Loyalty has a circle for me.', pts:{ cersei:3, daenerys:1 } }
+            ]},
+            { p:'Your relationship with authority is that…', h:'Choose the option closest to you.', a:[
+              { t:'I respect it if it deserves respect.', s:'Position alone means nothing to me.', pts:{ jon:3, arya:1 } },
+              { t:'I have no problem challenging it.', s:'If something is unjust, I react.', pts:{ daenerys:3, arya:1 } },
+              { t:'I understand that authority also has to be built.', s:'It is more complex than simple obedience.', pts:{ sansa:3, tyrion:1 } },
+              { t:'I would rather be the one deciding.', s:'I do not like depending on other people’s whims.', pts:{ cersei:3, daenerys:1 } }
+            ]},
+            { p:'You are most drawn to the vision of…', h:'Which future speaks to you most strongly?', a:[
+              { t:'Great change.', s:'I want to leave a mark.', pts:{ daenerys:3, jon:1 } },
+              { t:'A life aligned with honor.', s:'Honesty with myself gives me peace.', pts:{ jon:3, sansa:1 } },
+              { t:'Complete independence.', s:'I want to choose my own path.', pts:{ arya:3, daenerys:1 } },
+              { t:'A position from which nothing can push me away.', s:'Strength gives me safety.', pts:{ cersei:3, sansa:1 } }
+            ]},
+            { p:'In relationships, you value most…', h:'What is your foundation?', a:[
+              { t:'Faithfulness and devotion.', s:'Without that, it is hard for me to truly trust.', pts:{ jon:3, cersei:1 } },
+              { t:'The freedom to be myself.', s:'I do not want to be trapped in someone else’s expectations.', pts:{ arya:3, daenerys:1 } },
+              { t:'Mutual respect and intelligence.', s:'Closeness without understanding does not satisfy me.', pts:{ tyrion:3, sansa:1 } },
+              { t:'Loyalty to a shared goal.', s:'A relationship has to withstand reality.', pts:{ daenerys:3, jon:1 } }
+            ]},
+            { p:'When you begin a new chapter, what do you want most?', h:'What energy do you bring into the beginning?', a:[
+              { t:'To take the reins.', s:'I know where I want to go.', pts:{ daenerys:3, cersei:1 } },
+              { t:'To do it properly.', s:'I would rather go slower but honestly.', pts:{ jon:3, sansa:1 } },
+              { t:'To follow my own path.', s:'I do not want to be written into someone else’s plan.', pts:{ arya:3, jon:1 } },
+              { t:'To read the field and position the pieces.', s:'First I want to understand the game board.', pts:{ tyrion:3, sansa:1 } }
+            ]}
+          ]
+        }
+      },
+      hotd: {
+        previewLimit: 6,
+        pl: {
+          badge:'Quiz III', title:'Ród smoka', subtitle:'Targaryenowie · dziedzictwo · ogień · polityka', intro:'Ten quiz jest bardziej dynastyczny i polityczny: liczą się w nim ambicja, dziedzictwo, duma, strategia i sposób budowania wpływu. Wynik pokaże, która postać z Rodu smoka jest Ci najbliższa.', preview:['Rhaenyra','Daemon','Alicent','Rhaenys','Corlys','Aemond'],
+          characters:{
+            rhaenyra:{name:'Rhaenyra Targaryen',short:'Rhaenyra',image:'./rhaenyra.jpg',traits:['Charyzmatyczna','Uparta','Dziedziczka','Intensywna'],desc:'Najbliżej Ci do Rhaenyry, jeśli naturalnie walczysz o swoje miejsce i nie lubisz, gdy inni próbują pisać Twoją historię za Ciebie.',extra:'Masz silne poczucie tożsamości i ogromną potrzebę bycia traktowaną poważnie. Nawet pod presją nie rezygnujesz łatwo z tego, co uważasz za swoje.'},
+            daemon:{name:'Daemon Targaryen',short:'Daemon',image:'./daemon.jpg',traits:['Magnetyczny','Niepokorny','Ryzykowny','Silny'],desc:'Najbliżej Ci do Daemona, jeśli jesteś impulsywna, charyzmatyczna i trudna do zamknięcia w cudzych zasadach. Lubisz działać po swojemu.',extra:'Masz aurę, która przyciąga uwagę nawet wtedy, gdy milczysz. Rutyna Cię nuży, a intensywność daje Ci poczucie życia.'},
+            alicent:{name:'Alicent Hightower',short:'Alicent',image:'./alicent.jpg',traits:['Powściągliwa','Obowiązkowa','Polityczna','Kontrolująca'],desc:'Najbliżej Ci do Alicent, jeśli bardzo poważnie traktujesz powinność, odpowiedzialność i bezpieczeństwo własnego kręgu. W napięciu wybierasz porządek.',extra:'Twoją siłą jest dyscyplina i zdolność utrzymania się w ryzach nawet wtedy, gdy emocje są ogromne. Rzadko działasz bez namysłu.'},
+            rhaenys:{name:'Rhaenys Targaryen',short:'Rhaenys',image:'./rhaenys.jpg',traits:['Dostojna','Przenikliwa','Opanowana','Niezależna'],desc:'Najbliżej Ci do Rhaenys, jeśli siłę łączysz z klasą, a zamiast natychmiastowej reakcji często wybierasz chłodną ocenę sytuacji.',extra:'Masz w sobie spokojny autorytet. Nie potrzebujesz hałasu, żeby inni czuli Twoją obecność i wagę Twojego zdania.'},
+            corlys:{name:'Corlys Velaryon',short:'Corlys',image:'./corlys.jpg',traits:['Ambitny','Strategiczny','Dumny','Wizjonerski'],desc:'Najbliżej Ci do Corlysa, jeśli myślisz długofalowo i cenisz wielkie cele, prestiż oraz budowanie czegoś trwałego.',extra:'Masz w sobie energię zdobywcy. Lubisz czuć, że Twoje działania coś znaczą i prowadzą do realnej pozycji.'},
+            aemond:{name:'Aemond Targaryen',short:'Aemond',image:'./aemond.jpg',traits:['Dumny','Zawzięty','Zdyscyplinowany','Groźny'],desc:'Najbliżej Ci do Aemonda, jeśli pod spokojną powierzchnią kryje się w Tobie ogromna ambicja, duma i potrzeba, by nikt nigdy Cię nie zlekceważył.',extra:'Masz silną wolę i nie lubisz być niedoceniana. Gdy obierasz kierunek, potrafisz być bardzo konsekwentna i intensywna.'}
+          },
+          questions:[
+            { p:'Kiedy ktoś podważa Twoje prawo do czegoś, co uważasz za swoje…', h:'Jaka reakcja jest Ci najbliższa?', a:[
+              { t:'Walczę otwarcie i nie ustępuję.', s:'Nie pozwalam odbierać sobie miejsca.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Odpowiadam siłą i ryzykiem.', s:'Presja tylko mnie podkręca.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Stawiam na porządek i legitymizację.', s:'Najpierw chcę umocnić pozycję.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Patrzę na długą grę.', s:'Ważne jest nie tylko wygrać, ale wygrać mądrze.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'Najbardziej cenisz w sobie…', h:'Wybierz cechę, która jest Twoim rdzeniem.', a:[
+              { t:'Poczucie własnej wartości.', s:'Wiem, kim jestem, nawet gdy inni wątpią.', pts:{ rhaenyra:3, rhaenys:1 } },
+              { t:'Niepokorność.', s:'Nie chcę być wciśnięta w cudze ramy.', pts:{ daemon:3, aemond:1 } },
+              { t:'Dyscyplinę.', s:'Bez niej wszystko się rozsypuje.', pts:{ alicent:3, aemond:1 } },
+              { t:'Dalekowzroczność.', s:'Myślę o skutkach kilka ruchów naprzód.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'W konflikcie rodzinnym zwykle…', h:'Pomyśl, jak reagujesz naprawdę.', a:[
+              { t:'Bronię własnej pozycji.', s:'Nie mogę pozwolić się zepchnąć.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Działam impulsywnie, jeśli trzeba kogoś ochronić.', s:'Czasem ważniejsza jest lojalność niż forma.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Pilnuję zasad i bezpieczeństwa najbliższych.', s:'Chaos jest dla mnie groźny.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Zachowuję chłód i obserwuję, kto naprawdę zyskuje.', s:'Emocje nie mogą przysłonić układu sił.', pts:{ rhaenys:3, corlys:1 } }
+            ]},
+            { p:'Władza ma dla Ciebie największy sens wtedy, gdy…', h:'Która odpowiedź brzmi najmocniej?', a:[
+              { t:'Potwierdza to, kim jesteś i co Ci się należy.', s:'To kwestia uznania i miejsca.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Daje swobodę działania.', s:'Nie chcę być ograniczana.', pts:{ daemon:3, corlys:1 } },
+              { t:'Chroni porządek i tych, za których odpowiadasz.', s:'Bezpieczeństwo ma pierwszeństwo.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Pozwala budować trwałe dziedzictwo.', s:'Liczy się to, co zostaje po czasie.', pts:{ corlys:3, rhaenyra:1 } }
+            ]},
+            { p:'Najmocniej uruchamia Cię…', h:'Co naprawdę trudno Ci znieść?', a:[
+              { t:'Bycie niedocenianą.', s:'Gdy ktoś nie widzi mojej wartości, długo to pamiętam.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Nuda i stagnacja.', s:'Potrzebuję intensywności.', pts:{ daemon:3, corlys:1 } },
+              { t:'Utrata kontroli.', s:'Nie znoszę chaosu i bezradności.', pts:{ alicent:3, aemond:1 } },
+              { t:'Marnowanie potencjału.', s:'Szkoda mi życia na małe gry.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'Jak budujesz autorytet?', h:'Wybierz opcję najbliższą Twojemu stylowi.', a:[
+              { t:'Przez obecność i pewność siebie.', s:'Ludzie czują mój ciężar gatunkowy.', pts:{ rhaenyra:3, daemon:1 } },
+              { t:'Przez siłę osobowości.', s:'Nie da się przejść obok mnie obojętnie.', pts:{ daemon:3, aemond:1 } },
+              { t:'Przez konsekwencję i poprawność.', s:'Pokazuję, że można na mnie polegać.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Przez doświadczenie i kompetencję.', s:'Mój autorytet bierze się z dorobku.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'W relacjach najważniejsze jest dla Ciebie…', h:'Co jest Twoim fundamentem?', a:[
+              { t:'Bycie traktowaną serio.', s:'Nie chcę być czyimś dodatkiem.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Lojalność nawet w chaosie.', s:'Prawdziwa więź wytrzymuje ogień.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Stabilność i obowiązek.', s:'Relacja musi być osadzona w czymś trwałym.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Wzajemny szacunek i pozycja.', s:'Partnerstwo ma dla mnie też wymiar siły.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'Twoim naturalnym trybem działania jest…', h:'Które zdanie najlepiej Cię opisuje?', a:[
+              { t:'Upór.', s:'Nie odpuszczam łatwo swojego stanowiska.', pts:{ rhaenyra:3, alicent:1 } },
+              { t:'Ryzyko.', s:'Czasem lepiej zaryzykować niż utknąć.', pts:{ daemon:3, aemond:1 } },
+              { t:'Samokontrola.', s:'Emocje nie mogą mnie prowadzić.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Strategia.', s:'Wolę widzieć szeroki plan.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'Najbardziej imponuje Ci osoba, która…', h:'Wybierz typ siły, który najmocniej podziwiasz.', a:[
+              { t:'Wie, kim jest i nie przeprasza za to.', s:'To daje prawdziwą obecność.', pts:{ rhaenyra:3, daemon:1 } },
+              { t:'Nie boi się niebezpieczeństwa.', s:'Odwaga bez kalkulacji ma w sobie magnetyzm.', pts:{ daemon:3, aemond:1 } },
+              { t:'Trzyma się zasad mimo presji.', s:'Stałość budzi mój respekt.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Myśli pokoleniami, nie chwilą.', s:'Podziwiam wielkość w skali długiego czasu.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'Nowy etap życia chciałabyś zacząć od…', h:'Która wizja najbardziej Cię pociąga?', a:[
+              { t:'Objęcia miejsca, które mi się należy.', s:'Nie chcę już czekać na pozwolenie.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Rzucenia się w wir intensywnego życia.', s:'W ruchu czuję się najbardziej sobą.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Uporządkowania wszystkiego wokół.', s:'Potrzebuję struktury i wpływu.', pts:{ alicent:3, corlys:1 } },
+              { t:'Zbudowania dziedzictwa, z którego będę dumna.', s:'Chcę czegoś większego niż tylko teraźniejszość.', pts:{ corlys:3, rhaenys:1 } }
+            ]}
+          ]
+        },
+        en: {
+          badge:'Quiz III', title:'House of the Dragon', subtitle:'Targaryens · legacy · fire · politics', intro:'This quiz is more dynastic and political: ambition, legacy, pride, strategy, and the way you build influence matter most here. Your result will show which House of the Dragon character is closest to you.', preview:['Rhaenyra','Daemon','Alicent','Rhaenys','Corlys','Aemond'],
+          characters:{
+            rhaenyra:{name:'Rhaenyra Targaryen',short:'Rhaenyra',image:'./rhaenyra.jpg',traits:['Charismatic','Stubborn','Heir','Intense'],desc:'You are closest to Rhaenyra if you naturally fight for your place and dislike it when others try to write your story for you.',extra:'You have a strong sense of identity and a deep need to be taken seriously. Even under pressure, you do not give up what you believe is yours.'},
+            daemon:{name:'Daemon Targaryen',short:'Daemon',image:'./daemon.jpg',traits:['Magnetic','Defiant','Risky','Strong'],desc:'You are closest to Daemon if you are impulsive, charismatic, and difficult to confine within other people’s rules. You like acting on your own terms.',extra:'You have an aura that draws attention even when you are silent. Routine bores you, and intensity makes you feel alive.'},
+            alicent:{name:'Alicent Hightower',short:'Alicent',image:'./alicent.jpg',traits:['Restrained','Duty-bound','Political','Controlling'],desc:'You are closest to Alicent if you take duty, responsibility, and the safety of your inner circle very seriously. Under tension, you choose order.',extra:'Your strength lies in discipline and the ability to stay composed even when emotions run high. You rarely act without thinking.'},
+            rhaenys:{name:'Rhaenys Targaryen',short:'Rhaenys',image:'./rhaenys.jpg',traits:['Dignified','Perceptive','Composed','Independent'],desc:'You are closest to Rhaenys if you combine strength with class and often choose cool judgment over immediate reaction.',extra:'You carry a calm authority. You do not need noise for people to feel your presence and the weight of your opinion.'},
+            corlys:{name:'Corlys Velaryon',short:'Corlys',image:'./corlys.jpg',traits:['Ambitious','Strategic','Proud','Visionary'],desc:'You are closest to Corlys if you think long-term and value great goals, prestige, and building something lasting.',extra:'You have the energy of a conqueror. You like feeling that your actions matter and lead to real standing.'},
+            aemond:{name:'Aemond Targaryen',short:'Aemond',image:'./aemond.jpg',traits:['Proud','Driven','Disciplined','Fierce'],desc:'You are closest to Aemond if beneath a calm surface there is immense ambition, pride, and a need never to be underestimated.',extra:'You have strong willpower and dislike being undervalued. Once you choose a direction, you can be very consistent and intense.'}
+          },
+          questions:[
+            { p:'When someone challenges your right to something you believe is yours…', h:'Which reaction feels closest to you?', a:[
+              { t:'I fight openly and refuse to yield.', s:'I do not let anyone take my place from me.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'I answer with force and risk.', s:'Pressure only sharpens me.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'I choose order and legitimacy.', s:'First I want to strengthen my position.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'I think in terms of the long game.', s:'It matters not only to win, but to win wisely.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'What do you value most in yourself?', h:'Choose the trait that feels like your core.', a:[
+              { t:'Self-worth.', s:'I know who I am even when others doubt it.', pts:{ rhaenyra:3, rhaenys:1 } },
+              { t:'Defiance.', s:'I do not want to be pressed into someone else’s frame.', pts:{ daemon:3, aemond:1 } },
+              { t:'Discipline.', s:'Without it, everything falls apart.', pts:{ alicent:3, aemond:1 } },
+              { t:'Foresight.', s:'I think several moves ahead.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'In a family conflict, you usually…', h:'Think about how you truly react.', a:[
+              { t:'Defend my own place.', s:'I cannot allow myself to be pushed aside.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Act impulsively if someone must be protected.', s:'Sometimes loyalty matters more than form.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Guard rules and the safety of those closest to me.', s:'Chaos feels dangerous to me.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Stay cool and observe who really benefits.', s:'Emotion cannot eclipse the power structure.', pts:{ rhaenys:3, corlys:1 } }
+            ]},
+            { p:'Power matters most to you when it…', h:'Which answer feels strongest?', a:[
+              { t:'Confirms who I am and what belongs to me.', s:'It is about recognition and place.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Gives me freedom to act.', s:'I do not want to be limited.', pts:{ daemon:3, corlys:1 } },
+              { t:'Protects order and those I am responsible for.', s:'Safety comes first.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Lets me build lasting legacy.', s:'What remains over time matters most.', pts:{ corlys:3, rhaenyra:1 } }
+            ]},
+            { p:'What activates you most strongly?', h:'What is hardest for you to tolerate?', a:[
+              { t:'Being underestimated.', s:'When someone does not see my value, I remember it for a long time.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Boredom and stagnation.', s:'I need intensity.', pts:{ daemon:3, corlys:1 } },
+              { t:'Losing control.', s:'I cannot stand chaos and helplessness.', pts:{ alicent:3, aemond:1 } },
+              { t:'Wasted potential.', s:'Life is too precious for small games.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'How do you build authority?', h:'Choose the option closest to your style.', a:[
+              { t:'Through presence and confidence.', s:'People feel my weight in the room.', pts:{ rhaenyra:3, daemon:1 } },
+              { t:'Through force of personality.', s:'It is impossible to remain indifferent to me.', pts:{ daemon:3, aemond:1 } },
+              { t:'Through consistency and correctness.', s:'I show that I can be relied on.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Through experience and competence.', s:'My authority comes from what I have built.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'In relationships, what matters most to you?', h:'What is your foundation?', a:[
+              { t:'Being taken seriously.', s:'I do not want to be someone’s accessory.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Loyalty even in chaos.', s:'A true bond survives fire.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Stability and duty.', s:'A relationship should be rooted in something lasting.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Mutual respect and position.', s:'For me, partnership also has a dimension of strength.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'Your natural mode of action is…', h:'Which statement fits you best?', a:[
+              { t:'Persistence.', s:'I do not easily give up my stance.', pts:{ rhaenyra:3, alicent:1 } },
+              { t:'Risk.', s:'Sometimes it is better to gamble than remain stuck.', pts:{ daemon:3, aemond:1 } },
+              { t:'Self-control.', s:'My emotions cannot be allowed to lead me.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Strategy.', s:'I prefer to see the larger plan.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'You are most impressed by a person who…', h:'Choose the kind of strength you admire most.', a:[
+              { t:'Knows who they are and does not apologize for it.', s:'That creates real presence.', pts:{ rhaenyra:3, daemon:1 } },
+              { t:'Is not afraid of danger.', s:'Courage without calculation has magnetism.', pts:{ daemon:3, aemond:1 } },
+              { t:'Holds to principles under pressure.', s:'Steadiness earns my respect.', pts:{ alicent:3, rhaenys:1 } },
+              { t:'Thinks in generations, not moments.', s:'I admire greatness on a long scale.', pts:{ corlys:3, rhaenys:1 } }
+            ]},
+            { p:'You would like to begin a new chapter of life with…', h:'Which vision draws you most?', a:[
+              { t:'Claiming the place that is mine.', s:'I do not want to wait for permission anymore.', pts:{ rhaenyra:3, aemond:1 } },
+              { t:'Throwing myself into intense living.', s:'I feel most like myself in motion.', pts:{ daemon:3, rhaenyra:1 } },
+              { t:'Putting everything into order.', s:'I need structure and influence.', pts:{ alicent:3, corlys:1 } },
+              { t:'Building a legacy I can be proud of.', s:'I want something greater than the present moment.', pts:{ corlys:3, rhaenys:1 } }
+            ]}
+          ]
+        }
+      },
+
+      knight: {
+        previewLimit: 4,
+        pl: {
+          badge:'Quiz IV', title:'Rycerz Siedmiu Królestw', subtitle:'honor · droga · skromność · lojalność', intro:'Ten quiz sprawdza, czy bliżej Ci do odwagi, skromności, sprytu czy lojalności. Wynik pokaże, która postać z Rycerza Siedmiu Królestw najlepiej pasuje do Twojego sposobu bycia.', preview:['Tanselle','Rohanne','Lady Webber','Egg'],
+          characters:{
+            tanselle:{name:'Tanselle Too-Tall',short:'Tanselle',image:'./tanselle.jpg',traits:['Wolna','Twórcza','Niezależna','Wrażliwa'],desc:'Najbliżej Ci do Tanselle, jeśli masz w sobie wolność, artystyczny rys i niechęć do życia według cudzego scenariusza.',extra:'Nie musisz być najgłośniejsza, żeby zostawić po sobie ślad. Twoja siła płynie z autentyczności i własnego spojrzenia.'},
+            rohanne:{name:'Rohanne Webber',short:'Rohanne',image:'./rohanne.jpg',traits:['Porywcza','Dumna','Bystra','Samodzielna'],desc:'Najbliżej Ci do Rohanne, jeśli działasz szybko, bronisz swojego miejsca i nie lubisz, gdy ktoś Cię lekceważy.',extra:'Masz temperament, ale stoi za nim konkretna siła charakteru. W świecie pełnym gier potrafisz trzymać własną pozycję.'},
+            webber:{name:'Lady Webber',short:'Lady Webber',image:'./webber.jpg',traits:['Strategiczna','Rozważna','Uważna','Powściągliwa'],desc:'Najbliżej Ci do Lady Webber, jeśli najpierw patrzysz, analizujesz i dopiero potem wykonujesz ruch.',extra:'Twoja przewaga polega na tym, że nie musisz dominować hałasem. Umiesz czytać sytuację i działać wtedy, gdy naprawdę warto.'},
+            egg:{name:'Egg',short:'Egg',image:'./egg.jpg',traits:['Lojalny','Ciekawy','Odważny','Serdeczny'],desc:'Najbliżej Ci do Egga, jeśli masz w sobie jasność intencji, ciekawość świata i naturalną lojalność wobec ludzi, którym ufasz.',extra:'Twoja energia jest świeża i szczera. Nawet kiedy dopiero się uczysz, potrafisz widzieć więcej niż inni zakładają.'}
+          },
+          questions:[
+            { p:'Najbardziej imponuje Ci człowiek, który…', h:'Wybierz odpowiedź najbliższą Twojemu odruchowi.', a:[
+              { t:'Idzie własną drogą.', s:'Nie musi wpisywać się w cudze oczekiwania.', pts:{ tanselle:3, egg:1 } },
+              { t:'Umie walczyć o swoje.', s:'Nie oddaje pola bez powodu.', pts:{ rohanne:3, webber:1 } },
+              { t:'Myśli kilka ruchów do przodu.', s:'Siła może być cicha i precyzyjna.', pts:{ webber:3, rohanne:1 } },
+              { t:'Pozostaje wierny mimo prób.', s:'Lojalność jest dla mnie wielką wartością.', pts:{ egg:3, tanselle:1 } }
+            ]},
+            { p:'W nowym miejscu zwykle…', h:'Pomyśl o tym, jak zachowujesz się naprawdę.', a:[
+              { t:'Najpierw chłonę atmosferę.', s:'Ludzie i przestrzeń wiele mówią.', pts:{ tanselle:3, webber:1 } },
+              { t:'Szybko zaznaczam swoją obecność.', s:'Nie lubię być spychana na bok.', pts:{ rohanne:3, egg:1 } },
+              { t:'Obserwuję układ sił.', s:'Wolę najpierw zrozumieć teren.', pts:{ webber:3, rohanne:1 } },
+              { t:'Szukam jednej życzliwej osoby.', s:'Łatwiej mi wejść w relację niż w układ.', pts:{ egg:3, tanselle:1 } }
+            ]},
+            { p:'Najtrudniej przychodzi Ci zaakceptować…', h:'Wybierz odpowiedź, która naprawdę Cię dotyka.', a:[
+              { t:'Życie bez swobody.', s:'Potrzebuję przestrzeni dla siebie.', pts:{ tanselle:3, rohanne:1 } },
+              { t:'Lekceważenie.', s:'Bardzo źle znoszę protekcjonalność.', pts:{ rohanne:3, webber:1 } },
+              { t:'Chaos bez planu.', s:'Lepiej działam, gdy wiem, co z czego wynika.', pts:{ webber:3, egg:1 } },
+              { t:'Nielojalność.', s:'To szybko podcina moje zaufanie.', pts:{ egg:3, tanselle:1 } }
+            ]}
+          ]
+        },
+        en: {
+          badge:'Quiz IV', title:'A Knight of the Seven Kingdoms', subtitle:'honor · journey · humility · loyalty', intro:'This quiz explores whether you are driven more by courage, modesty, wit, or loyalty. Your result will show which A Knight of the Seven Kingdoms character best matches your way of moving through the world.', preview:['Tanselle','Rohanne','Lady Webber','Egg'],
+          characters:{
+            tanselle:{name:'Tanselle Too-Tall',short:'Tanselle',image:'./tanselle.jpg',traits:['Free-spirited','Creative','Independent','Sensitive'],desc:'You are closest to Tanselle if you carry freedom, artistry, and a refusal to live by someone else’s script.',extra:'You do not need to be the loudest person in the room to leave a mark. Your strength comes from authenticity and a distinct way of seeing.'},
+            rohanne:{name:'Rohanne Webber',short:'Rohanne',image:'./rohanne.jpg',traits:['Fiery','Proud','Sharp','Self-reliant'],desc:'You are closest to Rohanne if you act quickly, defend your place, and dislike being underestimated.',extra:'You have temperament, but real force of character stands behind it. In a world of games, you know how to hold your ground.'},
+            webber:{name:'Lady Webber',short:'Lady Webber',image:'./webber.jpg',traits:['Strategic','Measured','Observant','Reserved'],desc:'You are closest to Lady Webber if you prefer to watch, analyze, and only then make your move.',extra:'Your advantage is that you do not need noise to dominate. You read situations well and act when it truly matters.'},
+            egg:{name:'Egg',short:'Egg',image:'./egg.jpg',traits:['Loyal','Curious','Brave','Warm'],desc:'You are closest to Egg if you carry clarity of intention, curiosity, and natural loyalty toward the people you trust.',extra:'Your energy is fresh and sincere. Even while you are still learning, you often see more than others expect.'}
+          },
+          questions:[
+            { p:'You are most impressed by a person who…', h:'Choose the answer closest to your instinct.', a:[
+              { t:'Walks their own path.', s:'They do not need to fit other people’s expectations.', pts:{ tanselle:3, egg:1 } },
+              { t:'Knows how to fight for their place.', s:'They do not give ground for nothing.', pts:{ rohanne:3, webber:1 } },
+              { t:'Thinks several moves ahead.', s:'Strength can be quiet and precise.', pts:{ webber:3, rohanne:1 } },
+              { t:'Stays loyal through trials.', s:'Loyalty matters deeply to me.', pts:{ egg:3, tanselle:1 } }
+            ]},
+            { p:'In a new place, you usually…', h:'Think of how you truly behave.', a:[
+              { t:'Absorb the atmosphere first.', s:'People and spaces tell me a lot.', pts:{ tanselle:3, webber:1 } },
+              { t:'Make your presence known quickly.', s:'I do not like being pushed aside.', pts:{ rohanne:3, egg:1 } },
+              { t:'Observe the balance of power.', s:'I prefer to understand the terrain first.', pts:{ webber:3, rohanne:1 } },
+              { t:'Look for one kind person.', s:'It is easier for me to enter through connection.', pts:{ egg:3, tanselle:1 } }
+            ]},
+            { p:'The hardest thing for you to accept is…', h:'Choose the answer that truly hits you.', a:[
+              { t:'Life without freedom.', s:'I need room to remain myself.', pts:{ tanselle:3, rohanne:1 } },
+              { t:'Being underestimated.', s:'I handle condescension badly.', pts:{ rohanne:3, webber:1 } },
+              { t:'Chaos without a plan.', s:'I work better when things connect.', pts:{ webber:3, egg:1 } },
+              { t:'Disloyalty.', s:'It cuts down my trust very fast.', pts:{ egg:3, tanselle:1 } }
+            ]}
+          ]
+        }
+      },
+      foundation: {
+        previewLimit: 6,
+        dualResult: true,
+        dualRoleKey: 'roles',
+        pl: {
+          badge:'Quiz V', title:'Fundacja', subtitle:'przyszłość · pamięć · kryzys · imperium', intro:'Ten quiz daje dwa wyniki naraz. Najpierw pokaże, do której postaci z Fundacji jest Ci najbliżej, a potem odsłoni rolę, jaką pełniłabyś w tym świecie.', preview:['Gaal','Hari','Day','Dawn','Dusk','Demerzel'],
+          roleLabel:'Twoja rola',
+          roleLead:'W świecie Fundacji najbliżej Ci do tej funkcji:',
+          characters:{
+            gaal:{name:'Gaal Dornick',short:'Gaal',image:'./gaal.jpg',traits:['Intuicyjna','Przenikliwa','Wrażliwa','Niezależna'],desc:'Najbliżej Ci do serialowej Gaal, jeśli łączysz intelekt z intuicją i często wyczuwasz kierunek rzeczy wcześniej, niż potrafisz go nazwać.',extra:'Nie jesteś figurą centrum, ale właśnie dlatego widzisz więcej. Masz w sobie ruch ku przyszłości, nawet jeśli jeszcze nie ma dla niego języka.'},
+            hari:{name:'Hari Seldon',short:'Hari',image:'./hari.jpg',traits:['Systemowy','Dalekowzroczny','Chłodny','Twórczy'],desc:'Najbliżej Ci do Hariego, jeśli myślisz w kategoriach procesów, struktur i długiego czasu. Potrafisz zobaczyć większy wzór tam, gdzie inni widzą tylko chaos.',extra:'Twoją siłą jest projektowanie tego, co ma przetrwać. Nie zawsze jesteś najbardziej miękka, ale bardzo często jesteś tą osobą, która rozumie skalę.'},
+            day:{name:'Brother Day',short:'Day',image:'./day.jpg',traits:['Dominujący','Charyzmatyczny','Polityczny','Decyzyjny'],desc:'Najbliżej Ci do Brother Daya, jeśli naturalnie przejmujesz przestrzeń, nie boisz się wpływu i lubisz działać z pozycji mocy.',extra:'Masz w sobie pewność, która może zarówno pociągać, jak i onieśmielać. Gdy wchodzisz do gry, trudno Cię zignorować.'},
+            dawn:{name:'Brother Dawn',short:'Dawn',image:'./dawn.jpg',traits:['Wrażliwy','Niejednoznaczny','Poszukujący','Delikatny'],desc:'Najbliżej Ci do Brother Dawna, jeśli Twoja siła rodzi się z wewnętrznego pęknięcia, pytań i potrzeby odnalezienia własnego miejsca.',extra:'Nie jesteś typem czystej dominacji. Bardziej interesuje Cię przejście, przemiana i to, kim można się stać mimo narzuconej roli.'},
+            dusk:{name:'Brother Dusk',short:'Dusk',image:'./dusk.jpg',traits:['Refleksyjny','Pamiętliwy','Godny','Zachowawczy'],desc:'Najbliżej Ci do Brother Duska, jeśli ważne są dla Ciebie pamięć, ciągłość i świadomość tego, co zostało utracone.',extra:'Masz w sobie dystans i historyczną wyobraźnię. Często widzisz wagę rzeczy dopiero wtedy, gdy inni już chcą biec dalej.'},
+            demerzel:{name:'Demerzel',short:'Demerzel',image:'./demerzel.jpg',traits:['Opanowana','Lojalna','Złożona','Cierpliwa'],desc:'Najbliżej Ci do Demerzel, jeśli potrafisz łączyć chłód z czułością, obowiązek z emocją i przetrwanie z ukrytą głębią.',extra:'Jesteś osobą, która utrzymuje całość nawet wtedy, gdy sama ponosi najwyższy koszt. To siła cicha, ale niemal niezniszczalna.'}
+          },
+          roles:{
+            wzory:{name:'Czytelniczka wzorów',short:'Czytelniczka wzorów',traits:['Analiza','Intuicja','Przyszłość'],desc:'Czytasz ruchy świata jak ukryty zapis. Nie zawsze od razu umiesz to wyjaśnić, ale bardzo często przeczuwasz właściwy kierunek.',extra:'Twoja rola polega na rozpoznawaniu tego, co dopiero nadchodzi.'},
+            pamiec:{name:'Strażniczka pamięci',short:'Strażniczka pamięci',traits:['Ciągłość','Pamięć','Dziedzictwo'],desc:'Pilnujesz tego, co nie powinno zniknąć. W chaosie jesteś osobą, która pamięta sens, źródło i koszt dawnych wyborów.',extra:'Bez takich osób historia rozpada się na przypadkowe fragmenty.'},
+            przyszlosc:{name:'Architektka przyszłości',short:'Architektka przyszłości',traits:['Wizja','Struktura','Projekt'],desc:'Nie tylko przewidujesz — Ty budujesz. Najlepiej działasz wtedy, gdy możesz układać większy plan i prowadzić rzeczy ku dalszemu celowi.',extra:'Myślisz warstwowo, długoterminowo i systemowo.'},
+            kryzys:{name:'Mediatorka kryzysu',short:'Mediatorka kryzysu',traits:['Równowaga','Empatia','Napięcie'],desc:'W najtrudniejszych momentach umiesz uspokoić ruchy, które grożą rozpadem. Łączysz ludzi, języki i racje.',extra:'Nie uciekasz od napięcia — próbujesz nadać mu formę.'},
+            imperium:{name:'Imperialna strategini',short:'Imperialna strategini',traits:['Władza','Decyzja','Wpływ'],desc:'Najlepiej poruszasz się tam, gdzie stawką jest kontrola, porządek i siła oddziaływania. Rozumiesz mechanikę centrum.',extra:'Twoją domeną jest decyzja, układ i zdolność kształtowania biegu wydarzeń.'},
+            obrzeza:{name:'Głos obrzeży',short:'Głos obrzeży',traits:['Peryferie','Inność','Prawda'],desc:'Wnosisz perspektywę spoza centrum i właśnie dlatego potrafisz zobaczyć to, czego środek systemu nie chce dostrzec.',extra:'Twoja siła przychodzi z miejsca uznawanego za mniej ważne, ale to ono często widzi świat wyraźniej.'}
+          },
+
+          questions:[
+            { p:'Gdy patrzysz na przyszłość, najbardziej fascynuje Cię to, że…', h:'Wybierz odpowiedź najbliższą Twojej intuicji.', a:[
+              { t:'można ją odczytywać jak ukryty wzór.', s:'Pod powierzchnią rzeczy zawsze jest jakiś rytm.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'można ją świadomie projektować.', s:'Najciekawsze jest budowanie rzeczy, które przetrwają.', pts:{ hari:3, demerzel:1 }, rolePts:{ przyszlosc:3, imperium:1 } },
+              { t:'ujawnia, kto naprawdę nadaje ton wydarzeniom.', s:'Interesuje mnie układ sił, nie tylko jego dekoracja.', pts:{ day:3, dusk:1 }, rolePts:{ imperium:3, pamiec:1 } },
+              { t:'najwięcej mówią o niej ci, których centrum nie słucha.', s:'Peryferie często widzą wcześniej.', pts:{ dawn:2, gaal:2 }, rolePts:{ obrzeza:3, kryzys:1 } }
+            ]},
+            { p:'Kiedy trafiasz w sam środek kryzysu, Twój pierwszy odruch to…', h:'Pomyśl o realnym, nie idealnym odruchu.', a:[
+              { t:'uspokoić chaos i znaleźć punkt równowagi.', s:'Najpierw trzeba zatrzymać rozpad.', pts:{ demerzel:3, dawn:1 }, rolePts:{ kryzys:3, pamiec:1 } },
+              { t:'przejąć ster i narzucić kierunek.', s:'Ktoś musi podjąć decyzję.', pts:{ day:3, hari:1 }, rolePts:{ imperium:3, przyszlosc:1 } },
+              { t:'sprawdzić, jakie zależności to tłumaczą.', s:'Chcę zrozumieć wzór pod chaosem.', pts:{ hari:3, gaal:1 }, rolePts:{ wzory:2, przyszlosc:2 } },
+              { t:'obserwować ludzi, bo kryzys odsłania pamięć i ukryte motywacje.', s:'W napięciu wychodzi to, co naprawdę istotne.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, kryzys:1 } }
+            ]},
+            { p:'Najbardziej niepokoi Cię świat, w którym…', h:'Wybierz odpowiedź, która naprawdę Cię porusza.', a:[
+              { t:'władza przestaje pamiętać, po co istnieje.', s:'System bez sensu staje się pusty.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, imperium:1 } },
+              { t:'ludzie działają bez większego planu.', s:'Chaos bez struktury kosztuje za dużo.', pts:{ hari:3, day:1 }, rolePts:{ przyszlosc:3, imperium:1 } },
+              { t:'cisi i oddaleni zostają całkiem pominięci.', s:'Najgorsze dzieje się wtedy, gdy centrum nikogo nie słyszy.', pts:{ gaal:3, dawn:1 }, rolePts:{ obrzeza:3, kryzys:1 } },
+              { t:'emocje są traktowane jak przeszkoda zamiast źródła poznania.', s:'Nie wszystko da się odczytać tylko rozumem.', pts:{ dawn:3, gaal:1 }, rolePts:{ kryzys:2, wzory:2 } }
+            ]},
+            { p:'Które zdanie brzmi najbardziej jak Ty?', h:'Wybierz to, które najpełniej oddaje Twój rdzeń.', a:[
+              { t:'Rozumiem więcej, niż od razu potrafię wyjaśnić.', s:'Część rzeczy najpierw się czuje, potem dopiero nazywa.', pts:{ gaal:3, dawn:1 }, rolePts:{ wzory:3, obrzeza:1 } },
+              { t:'Najważniejsze jest to, co przetrwa pokolenia.', s:'Myślę długim trwaniem, nie tylko chwilą.', pts:{ hari:3, dusk:1 }, rolePts:{ przyszlosc:2, pamiec:2 } },
+              { t:'Porządek trzeba czasem utrzymać twardą ręką.', s:'Nie wszystko da się uratować łagodnością.', pts:{ day:3, demerzel:1 }, rolePts:{ imperium:3, kryzys:1 } },
+              { t:'Prawdziwe zmiany zaczynają się poza centrum.', s:'Najwięcej energii rodzi się na obrzeżach.', pts:{ dawn:2, gaal:2 }, rolePts:{ obrzeza:3, wzory:1 } }
+            ]},
+            { p:'Jeśli masz wpływ na bieg wydarzeń, chcesz przede wszystkim…', h:'Pomyśl, co daje Ci najgłębsze poczucie sensu.', a:[
+              { t:'zmniejszyć skalę przyszłej katastrofy.', s:'Nie wszystko da się ocalić, ale można ograniczyć stratę.', pts:{ hari:3, demerzel:1 }, rolePts:{ przyszlosc:3, kryzys:1 } },
+              { t:'ochronić ciągłość systemu.', s:'Rozpad ma koszt większy, niż zwykle widać na początku.', pts:{ dusk:2, demerzel:2 }, rolePts:{ pamiec:3, imperium:1 } },
+              { t:'usłyszeć to, czego inni nie chcą słuchać.', s:'Najwięcej prawdy bywa na marginesie.', pts:{ gaal:3, dawn:1 }, rolePts:{ obrzeza:3, kryzys:1 } },
+              { t:'połączyć sprzeczne strony, zanim wszystko pęknie.', s:'W napięciu najważniejsze jest utrzymanie mostów.', pts:{ demerzel:3, dawn:1 }, rolePts:{ kryzys:3, pamiec:1 } }
+            ]},
+            { p:'Twoja największa siła to najczęściej…', h:'Wybierz tę cechę, którą naprawdę w sobie rozpoznajesz.', a:[
+              { t:'intuicja połączona z myśleniem abstrakcyjnym.', s:'Widzę związki, zanim staną się oczywiste.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'cierpliwość i długie widzenie historii.', s:'Nie wszystko trzeba rozstrzygać od razu.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, kryzys:1 } },
+              { t:'naturalna zdolność zarządzania ludźmi i przestrzenią.', s:'Lubię, gdy coś ma wyraźny kierunek.', pts:{ day:3, hari:1 }, rolePts:{ imperium:3, przyszlosc:1 } },
+              { t:'czytanie napięć zanim przerodzą się w konflikt.', s:'Czuję moment, w którym coś zaczyna pękać.', pts:{ demerzel:3, dawn:1 }, rolePts:{ kryzys:3, obrzeza:1 } }
+            ]},
+            { p:'W relacji z wiedzą jesteś raczej osobą, która…', h:'Wybierz odpowiedź najbliższą Twojemu stylowi myślenia.', a:[
+              { t:'szuka ukrytego modelu pod powierzchnią rzeczy.', s:'Interesuje mnie to, co porządkuje chaos.', pts:{ hari:2, gaal:2 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'traktuje wiedzę jako narzędzie władzy i decyzji.', s:'To, co wiem, ma prowadzić do wpływu.', pts:{ day:3, dusk:1 }, rolePts:{ imperium:3, pamiec:1 } },
+              { t:'widzi wiedzę jako formę pamięci cywilizacji.', s:'Przeszłość nie jest martwa, tylko aktywna.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, wzory:1 } },
+              { t:'uważa, że wiedza bez empatii prowadzi do ślepoty.', s:'Nie chcę rozumieć świata kosztem ludzi.', pts:{ dawn:2, demerzel:2 }, rolePts:{ kryzys:3, obrzeza:1 } }
+            ]},
+            { p:'Najbardziej pociąga Cię rola osoby, która…', h:'Wybierz wizję najbardziej kuszącą.', a:[
+              { t:'rozumie procesy wcześniej niż inni.', s:'Największa przewaga to dostrzec kierunek zawczasu.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'stoi na straży tego, co ma trwać.', s:'Nie wszystko nowe jest lepsze od ciągłości.', pts:{ demerzel:2, dusk:2 }, rolePts:{ pamiec:3, imperium:1 } },
+              { t:'przemawia z miejsca uznawanego za mniej ważne.', s:'To, co odsunięte, bywa najtrafniejsze.', pts:{ dawn:2, gaal:2 }, rolePts:{ obrzeza:3, kryzys:1 } },
+              { t:'utrzymuje całość w ruchu mimo sprzecznych interesów.', s:'Najbardziej fascynuje mnie spinanie wszystkiego razem.', pts:{ demerzel:3, day:1 }, rolePts:{ kryzys:2, imperium:2 } }
+            ]},
+            { p:'Gdy ktoś podważa Twój autorytet, Ty najczęściej…', h:'Pomyśl o swoim pierwszym odruchu.', a:[
+              { t:'odpowiadasz spokojem i precyzją.', s:'Nie potrzebuję hałasu, żeby mieć rację.', pts:{ hari:3, dusk:1 }, rolePts:{ przyszlosc:2, pamiec:2 } },
+              { t:'pokazujesz, że kontrola nadal należy do Ciebie.', s:'Nie pozwalam łatwo przesunąć granic.', pts:{ day:3, demerzel:1 }, rolePts:{ imperium:3, kryzys:1 } },
+              { t:'wycofujesz się pozornie, ale zapamiętujesz wszystko.', s:'Czasem największą siłą jest pamięć i obserwacja.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, obrzeza:1 } },
+              { t:'próbujesz zrozumieć, z czego naprawdę bierze się ten opór.', s:'Za konfliktem często stoi coś głębszego.', pts:{ dawn:2, gaal:2 }, rolePts:{ kryzys:3, wzory:1 } }
+            ]},
+            { p:'Najbliższa jest Ci wizja świata, w której…', h:'Wybierz tę, która brzmi najbardziej prawdziwie.', a:[
+              { t:'przyszłość da się odczytać, ale nie całkowicie ujarzmić.', s:'Wzory istnieją, ale nigdy nie są absolutne.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'pamięć jest równie ważna jak działanie.', s:'Bez ciągłości nawet wielkie ruchy tracą sens.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, kryzys:1 } },
+              { t:'kryzys nie jest końcem, tylko punktem przejścia.', s:'Najwięcej rodzi się właśnie w pęknięciu.', pts:{ dawn:3, gaal:1 }, rolePts:{ kryzys:3, obrzeza:1 } },
+              { t:'centrum nie zawsze ma rację, nawet jeśli ma władzę.', s:'To, co oficjalne, nie zawsze jest prawdziwe.', pts:{ gaal:2, dawn:2 }, rolePts:{ obrzeza:3, imperium:1 } }
+            ]}
+          ]
+        },
+        en: {
+          badge:'Quiz V', title:'Foundation', subtitle:'future · memory · crisis · empire', intro:'This quiz gives you two results at once. First, it shows which Foundation character you are closest to, then it reveals the role you would most likely play in that world.', preview:['Gaal','Hari','Day','Dawn','Dusk','Demerzel'],
+          roleLabel:'Your role',
+          roleLead:'In the world of Foundation, you are closest to this function:',
+          characters:{
+            gaal:{name:'Gaal Dornick',short:'Gaal',image:'./gaal.jpg',traits:['Intuitive','Perceptive','Sensitive','Independent'],desc:'You are closest to the series version of Gaal if you combine intellect with intuition and often sense the direction of things before you can name it.',extra:'You are not a figure of the center, and that is exactly why you see more. There is movement toward the future in you, even when there is not yet language for it.'},
+            hari:{name:'Hari Seldon',short:'Hari',image:'./hari.jpg',traits:['Systemic','Far-sighted','Cool-headed','Creative'],desc:'You are closest to Hari if you think in terms of processes, structures, and long stretches of time. You can see a larger pattern where others only see chaos.',extra:'Your strength lies in designing what is meant to endure. You are not always the softest person in the room, but very often you are the one who understands the scale.'},
+            day:{name:'Brother Day',short:'Day',image:'./day.jpg',traits:['Dominant','Charismatic','Political','Decisive'],desc:'You are closest to Brother Day if you naturally take up space, do not fear influence, and like acting from a position of power.',extra:'There is a certainty in you that can both attract and intimidate. Once you enter the game, you are hard to ignore.'},
+            dawn:{name:'Brother Dawn',short:'Dawn',image:'./dawn.jpg',traits:['Sensitive','Ambiguous','Searching','Gentle'],desc:'You are closest to Brother Dawn if your strength is born from inner fracture, questions, and the need to find your own place.',extra:'You are not a figure of pure domination. You are more interested in transition, transformation, and who a person can become beyond an assigned role.'},
+            dusk:{name:'Brother Dusk',short:'Dusk',image:'./dusk.jpg',traits:['Reflective','Remembering','Dignified','Conservative'],desc:'You are closest to Brother Dusk if memory, continuity, and awareness of what has been lost matter deeply to you.',extra:'There is distance and historical imagination in you. You often recognize the weight of things just when others want to rush onward.'},
+            demerzel:{name:'Demerzel',short:'Demerzel',image:'./demerzel.jpg',traits:['Composed','Loyal','Complex','Patient'],desc:'You are closest to Demerzel if you can combine coolness with tenderness, duty with emotion, and survival with hidden depth.',extra:'You are the kind of person who holds the whole structure together even when you pay the highest personal cost. It is quiet strength, but nearly indestructible.'}
+          },
+          roles:{
+            wzory:{name:'Reader of Patterns',short:'Reader of Patterns',traits:['Analysis','Intuition','Future'],desc:'You read the movement of the world like a hidden script. You may not always explain it right away, but you often sense the right direction.',extra:'Your role is to recognize what is only beginning to emerge.'},
+            pamiec:{name:'Keeper of Memory',short:'Keeper of Memory',traits:['Continuity','Memory','Legacy'],desc:'You protect what should not disappear. In chaos, you are the person who remembers meaning, origin, and the cost of earlier choices.',extra:'Without people like you, history breaks into random fragments.'},
+            przyszlosc:{name:'Architect of the Future',short:'Architect of the Future',traits:['Vision','Structure','Design'],desc:'You do not only predict — you build. You work best when you can shape a larger plan and guide events toward a long-range goal.',extra:'You think in layers, systems, and long horizons.'},
+            kryzys:{name:'Mediator of Crisis',short:'Mediator of Crisis',traits:['Balance','Empathy','Tension'],desc:'In the hardest moments, you can calm movements that threaten to split everything apart. You connect people, languages, and positions.',extra:'You do not run from tension — you try to give it form.'},
+            imperium:{name:'Imperial Strategist',short:'Imperial Strategist',traits:['Power','Decision','Influence'],desc:'You move best where the stakes are control, order, and the force of impact. You understand the mechanics of the center.',extra:'Your domain is decision, structure, and shaping the course of events.'},
+            obrzeza:{name:'Voice of the Periphery',short:'Voice of the Periphery',traits:['Periphery','Difference','Truth'],desc:'You bring a perspective from outside the center, and that is why you can see what the heart of the system refuses to notice.',extra:'Your strength comes from a place treated as less important, but it often sees the world more clearly.'}
+          },
+
+          questions:[
+            { p:'When you look at the future, what fascinates you most is that…', h:'Choose the answer closest to your instinct.', a:[
+              { t:'it can be read like a hidden pattern.', s:'There is always a rhythm under the surface.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'it can be deliberately designed.', s:'The most interesting thing is building what will last.', pts:{ hari:3, demerzel:1 }, rolePts:{ przyszlosc:3, imperium:1 } },
+              { t:'it reveals who truly sets events in motion.', s:'I care about structures of power, not just decoration.', pts:{ day:3, dusk:1 }, rolePts:{ imperium:3, pamiec:1 } },
+              { t:'it speaks most clearly through those the center ignores.', s:'The periphery often sees first.', pts:{ dawn:2, gaal:2 }, rolePts:{ obrzeza:3, kryzys:1 } }
+            ]},
+            { p:'When you find yourself at the center of a crisis, your first instinct is to…', h:'Think of your real reaction, not the ideal one.', a:[
+              { t:'calm the chaos and find a point of balance.', s:'First, the collapse has to stop.', pts:{ demerzel:3, dawn:1 }, rolePts:{ kryzys:3, pamiec:1 } },
+              { t:'take control and impose direction.', s:'Someone has to decide.', pts:{ day:3, hari:1 }, rolePts:{ imperium:3, przyszlosc:1 } },
+              { t:'check which patterns explain it.', s:'I want to understand the structure beneath the chaos.', pts:{ hari:3, gaal:1 }, rolePts:{ wzory:2, przyszlosc:2 } },
+              { t:'watch people, because crisis exposes memory and hidden motives.', s:'Tension reveals what truly matters.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, kryzys:1 } }
+            ]},
+            { p:'What unsettles you most is a world in which…', h:'Choose the answer that genuinely moves you.', a:[
+              { t:'power forgets why it exists.', s:'A system without meaning becomes empty.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, imperium:1 } },
+              { t:'people act without a larger plan.', s:'Chaos without structure costs too much.', pts:{ hari:3, day:1 }, rolePts:{ przyszlosc:3, imperium:1 } },
+              { t:'quiet and distant people are completely ignored.', s:'The worst happens when the center stops listening.', pts:{ gaal:3, dawn:1 }, rolePts:{ obrzeza:3, kryzys:1 } },
+              { t:'emotion is treated as an obstacle rather than a source of knowledge.', s:'Not everything can be read through reason alone.', pts:{ dawn:3, gaal:1 }, rolePts:{ kryzys:2, wzory:2 } }
+            ]},
+            { p:'Which sentence sounds most like you?', h:'Choose the one that feels closest to your core.', a:[
+              { t:'I understand more than I can explain right away.', s:'Some things are felt before they are named.', pts:{ gaal:3, dawn:1 }, rolePts:{ wzory:3, obrzeza:1 } },
+              { t:'What matters most is what will outlast generations.', s:'I think in long duration, not just in moments.', pts:{ hari:3, dusk:1 }, rolePts:{ przyszlosc:2, pamiec:2 } },
+              { t:'Order sometimes has to be maintained with a firm hand.', s:'Not everything can be saved with softness.', pts:{ day:3, demerzel:1 }, rolePts:{ imperium:3, kryzys:1 } },
+              { t:'Real change begins outside the center.', s:'The strongest energy often comes from the edges.', pts:{ dawn:2, gaal:2 }, rolePts:{ obrzeza:3, wzory:1 } }
+            ]},
+            { p:'If you can influence events, you want above all to…', h:'Think about what gives you the deepest sense of purpose.', a:[
+              { t:'reduce the scale of future catastrophe.', s:'Not everything can be saved, but loss can be limited.', pts:{ hari:3, demerzel:1 }, rolePts:{ przyszlosc:3, kryzys:1 } },
+              { t:'protect the continuity of the system.', s:'Collapse costs more than it first appears.', pts:{ dusk:2, demerzel:2 }, rolePts:{ pamiec:3, imperium:1 } },
+              { t:'hear what others do not want to hear.', s:'The margins often carry the deepest truth.', pts:{ gaal:3, dawn:1 }, rolePts:{ obrzeza:3, kryzys:1 } },
+              { t:'connect opposing sides before everything breaks.', s:'In tension, bridges matter most.', pts:{ demerzel:3, dawn:1 }, rolePts:{ kryzys:3, pamiec:1 } }
+            ]},
+            { p:'Your greatest strength is usually…', h:'Choose the trait you truly recognize in yourself.', a:[
+              { t:'intuition joined with abstract thinking.', s:'I see relations before they become obvious.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'patience and long historical vision.', s:'Not everything has to be resolved immediately.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, kryzys:1 } },
+              { t:'a natural ability to manage people and space.', s:'I like things to have direction.', pts:{ day:3, hari:1 }, rolePts:{ imperium:3, przyszlosc:1 } },
+              { t:'reading tensions before they turn into conflict.', s:'I can feel when something is beginning to fracture.', pts:{ demerzel:3, dawn:1 }, rolePts:{ kryzys:3, obrzeza:1 } }
+            ]},
+            { p:'In relation to knowledge, you are more the kind of person who…', h:'Choose the answer closest to your style of thinking.', a:[
+              { t:'looks for the hidden model beneath the surface.', s:'I care about what organizes chaos.', pts:{ hari:2, gaal:2 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'treats knowledge as a tool of power and decision.', s:'What I know should lead to influence.', pts:{ day:3, dusk:1 }, rolePts:{ imperium:3, pamiec:1 } },
+              { t:'sees knowledge as a form of civilizational memory.', s:'The past is not dead, only active.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, wzory:1 } },
+              { t:'believes knowledge without empathy leads to blindness.', s:'I do not want to understand the world at the expense of people.', pts:{ dawn:2, demerzel:2 }, rolePts:{ kryzys:3, obrzeza:1 } }
+            ]},
+            { p:'You are most drawn to the role of someone who…', h:'Choose the most tempting vision.', a:[
+              { t:'understands processes before others do.', s:'The greatest advantage is seeing direction early.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'guards what is meant to endure.', s:'Not everything new is better than continuity.', pts:{ demerzel:2, dusk:2 }, rolePts:{ pamiec:3, imperium:1 } },
+              { t:'speaks from a place considered less important.', s:'What is pushed aside can be the most accurate.', pts:{ dawn:2, gaal:2 }, rolePts:{ obrzeza:3, kryzys:1 } },
+              { t:'keeps the whole system moving despite conflicting interests.', s:'What fascinates me most is holding everything together.', pts:{ demerzel:3, day:1 }, rolePts:{ kryzys:2, imperium:2 } }
+            ]},
+            { p:'When someone questions your authority, you most often…', h:'Think of your first instinct.', a:[
+              { t:'respond with calm and precision.', s:'I do not need noise to be right.', pts:{ hari:3, dusk:1 }, rolePts:{ przyszlosc:2, pamiec:2 } },
+              { t:'show that control still belongs to you.', s:'I do not let my boundaries shift easily.', pts:{ day:3, demerzel:1 }, rolePts:{ imperium:3, kryzys:1 } },
+              { t:'withdraw outwardly, but remember everything.', s:'Sometimes memory and observation are the strongest force.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, obrzeza:1 } },
+              { t:'try to understand what truly creates the resistance.', s:'Conflict often hides something deeper.', pts:{ dawn:2, gaal:2 }, rolePts:{ kryzys:3, wzory:1 } }
+            ]},
+            { p:'You feel closest to a vision of the world in which…', h:'Choose the one that sounds most true to you.', a:[
+              { t:'the future can be read, but never fully controlled.', s:'Patterns exist, but they are never absolute.', pts:{ gaal:3, hari:1 }, rolePts:{ wzory:3, przyszlosc:1 } },
+              { t:'memory matters as much as action.', s:'Without continuity, even great movements lose meaning.', pts:{ dusk:3, demerzel:1 }, rolePts:{ pamiec:3, kryzys:1 } },
+              { t:'crisis is not an ending but a point of transition.', s:'The most important things are born in fracture.', pts:{ dawn:3, gaal:1 }, rolePts:{ kryzys:3, obrzeza:1 } },
+              { t:'the center is not always right, even when it has power.', s:'What is official is not always what is true.', pts:{ gaal:2, dawn:2 }, rolePts:{ obrzeza:3, imperium:1 } }
+            ]}
+          ]
+        }
+      },
+      starwars: {
+        previewLimit: 6,
+        pl: {
+          badge:'Quiz VI', title:'Star Wars', subtitle:'moc · bunt · lojalność · przeznaczenie', intro:'Ten quiz sprawdza, która postać ze świata Star Wars najlepiej pasuje do Twojej energii, sposobu działania i moralnego kompasu.', preview:['Leia','Padmé','Ahsoka','Rey','Jyn','Sabine'],
+          characters:{
+            leia:{name:'Leia Organa',short:'Leia',image:'./leia.jpg',traits:['Przywódcza','Twarda','Lojalna','Bystra'],desc:'Najbliżej Ci do Lei, jeśli naturalnie bierzesz odpowiedzialność, umiesz łączyć serce z politycznym instynktem i nie uciekasz od trudnych decyzji.',extra:'Masz w sobie ogień, ale nie jest to ogień chaosu. To energia osoby, która potrafi prowadzić innych przez napięcie.'},
+            padme:{name:'Padmé Amidala',short:'Padmé',image:'./padme.jpg',traits:['Dyplomatyczna','Godna','Empatyczna','Stanowcza'],desc:'Najbliżej Ci do Padmé, jeśli cenisz godność, dialog i działanie z myślą o większym dobru.',extra:'W Twojej sile jest elegancja i konsekwencja. Wiesz, że stanowczość nie musi oznaczać brutalności.'},
+            ahsoka:{name:'Ahsoka Tano',short:'Ahsoka',image:'./ahsoka.jpg',traits:['Niezależna','Uważna','Odważna','Dojrzała'],desc:'Najbliżej Ci do Ahsoki, jeśli rozwijasz się poprzez własne wybory, a nie przez ślepe posłuszeństwo wobec instytucji.',extra:'Jesteś typem osoby, która dojrzewa przez drogę. Nie zawsze wybierasz łatwo, ale wybierasz uczciwie.'},
+            rey:{name:'Rey',short:'Rey',image:'./rey.jpg',traits:['Intuicyjna','Wytrwała','Samotna','Świetlista'],desc:'Najbliżej Ci do Rey, jeśli masz w sobie silną intuicję, wewnętrzne światło i gotowość, by wzrastać mimo niepewności.',extra:'Nie musisz znać całej mapy, żeby ruszyć dalej. Często prowadzi Cię coś głębszego niż pewność.'},
+            jyn:{name:'Jyn Erso',short:'Jyn',image:'./jyn.jpg',traits:['Buntownicza','Szorstka','Skuteczna','Lojalna'],desc:'Najbliżej Ci do Jyn, jeśli nie wierzysz łatwo w wielkie słowa, ale potrafisz zrobić coś naprawdę odważnego, gdy stawka jest prawdziwa.',extra:'Masz w sobie opór wobec pustych narracji. Działasz najmocniej wtedy, gdy wiesz, że to naprawdę ma znaczenie.'},
+            sabine:{name:'Sabine Wren',short:'Sabine',image:'./sabine.jpg',traits:['Twórcza','Buntownicza','Wyrazista','Wierna'],desc:'Najbliżej Ci do Sabine, jeśli Twoja tożsamość jest twórcza, niepokorna i bardzo osobista.',extra:'Masz potrzebę zostawiania własnego śladu. Najpełniej działasz wtedy, gdy możesz połączyć wolność, styl i lojalność.'}
+          },
+
+          questions:[
+            { p:'Najbliższa jest Ci wizja siły, która…', h:'Wybierz to, co naprawdę do Ciebie mówi.', a:[
+              { t:'prowadzi ludzi i bierze odpowiedzialność.', s:'Wpływ ma sens tylko wtedy, gdy służy innym.', pts:{ leia:3, padme:1 } },
+              { t:'broni ładu bez utraty empatii.', s:'Najtrudniejsze decyzje nie muszą być okrutne.', pts:{ padme:3, leia:1 } },
+              { t:'rodzi się z niezależności i własnej drogi.', s:'Nie chcę ślepo należeć.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'pojawia się tam, gdzie ktoś odkrywa siebie.', s:'Największa przemiana zaczyna się od wewnątrz.', pts:{ rey:3, jyn:1 } }
+            ]},
+            { p:'W konflikcie zwykle bardziej ufasz…', h:'Pomyśl o swoim pierwszym odruchu.', a:[
+              { t:'strategii i odpowiedzialności.', s:'Trzeba widzieć całość.', pts:{ leia:3, padme:1 } },
+              { t:'rozmowie i zasadom.', s:'Nie wszystko trzeba rozstrzygać siłą.', pts:{ padme:3, ahsoka:1 } },
+              { t:'instynktowi i ruchowi.', s:'Czasem prawda przychodzi w działaniu.', pts:{ rey:3, ahsoka:1 } },
+              { t:'buntowi wobec fałszu.', s:'Nie chcę udawać, że system zawsze ma rację.', pts:{ jyn:3, sabine:1 } }
+            ]},
+            { p:'Najmocniej porusza Cię bohaterka, która…', h:'Wybierz odpowiedź najbardziej Twoją.', a:[
+              { t:'potrafi przewodzić bez utraty człowieczeństwa.', s:'Siła i czułość mogą iść razem.', pts:{ leia:3, padme:1 } },
+              { t:'wierzy w dobro nawet w świecie kompromisów.', s:'Nie chcę, by cynizm wszystko zatruł.', pts:{ padme:3, rey:1 } },
+              { t:'wybiera własny kodeks zamiast narzuconej ścieżki.', s:'Wierność sobie bywa ważniejsza niż instytucja.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'zaczyna z marginesu, ale zmienia bieg rzeczy.', s:'Najciekawsze historie rodzą się spoza centrum.', pts:{ jyn:2, rey:2 } }
+            ]},
+            { p:'Gdy trafiasz do skostniałej struktury, najczęściej…', h:'Wybierz odpowiedź najbliższą Twojemu stylowi działania.', a:[
+              { t:'próbujesz ją zmienić od środka.', s:'Najpierw chcę sprawdzić, czy da się ją uratować.', pts:{ leia:2, padme:2 } },
+              { t:'zachowujesz zasady, ale po swojemu.', s:'Nie odrzucam wszystkiego, tylko szukam własnej wersji drogi.', pts:{ ahsoka:3, rey:1 } },
+              { t:'tracisz do niej cierpliwość.', s:'Nie lubię pustej hierarchii.', pts:{ jyn:3, sabine:1 } },
+              { t:'szukasz w niej sensu i dobra, nawet jeśli jest kruche.', s:'Wierzę, że nie wszystko trzeba palić, by zacząć od nowa.', pts:{ padme:2, rey:2 } }
+            ]},
+            { p:'Twoją największą siłą jest najczęściej…', h:'Pomyśl, co ludzie naprawdę w Tobie widzą.', a:[
+              { t:'umiejętność prowadzenia innych.', s:'Nawet pod presją zachowuję kierunek.', pts:{ leia:3, padme:1 } },
+              { t:'godność i spokojna stanowczość.', s:'Nie potrzebuję hałasu, żeby być silna.', pts:{ padme:3, leia:1 } },
+              { t:'niezależność i własny kompas moralny.', s:'Najważniejsze wybory muszą być moje.', pts:{ ahsoka:3, jyn:1 } },
+              { t:'odporność i zdolność podnoszenia się.', s:'Nawet po chaosie umiem ruszyć dalej.', pts:{ rey:3, sabine:1 } }
+            ]},
+            { p:'Najtrudniejsze jest dla Ciebie to, gdy…', h:'Wybierz odpowiedź, która naprawdę Cię dotyka.', a:[
+              { t:'musisz patrzeć, jak inni tracą nadzieję.', s:'Najbardziej boli mnie zbiorowe pęknięcie.', pts:{ leia:3, rey:1 } },
+              { t:'ktoś zdradza własne wartości dla wygody.', s:'Nie znoszę moralnego rozmiękczenia.', pts:{ padme:3, leia:1 } },
+              { t:'instytucja próbuje odebrać Ci tożsamość.', s:'Nie chcę być jedynie funkcją systemu.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'świat wymaga od Ciebie zaufania, na które jeszcze nie jesteś gotowa.', s:'Najpierw muszę sama zrozumieć, kim jestem.', pts:{ rey:3, jyn:1 } }
+            ]},
+            { p:'Najbardziej pociąga Cię historia o…', h:'Wybierz tę, którą odruchowo chciałabyś śledzić.', a:[
+              { t:'polityce, oporze i odpowiedzialności.', s:'Najciekawsze są wybory z ciężarem wspólnoty.', pts:{ leia:3, padme:1 } },
+              { t:'wierze w dobro mimo pęknięć świata.', s:'To daje mi najwięcej światła.', pts:{ padme:2, rey:2 } },
+              { t:'odejściu od narzuconej drogi.', s:'Najmocniej porusza mnie samodzielne stawanie się sobą.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'buncie, który rodzi się z gniewu i straty.', s:'Najbardziej wierzę w przemianę z marginesu.', pts:{ jyn:3, rey:1 } }
+            ]},
+            { p:'W relacjach najważniejsze jest dla Ciebie…', h:'Pomyśl o tym, co daje Ci poczucie prawdziwości.', a:[
+              { t:'partnerstwo w odpowiedzialności.', s:'Chcę budować coś wspólnie i serio.', pts:{ leia:3, padme:1 } },
+              { t:'wspólnota wartości.', s:'Bez tego wszystko się rozjeżdża.', pts:{ padme:3, ahsoka:1 } },
+              { t:'wolność bez kontroli.', s:'Bliskość nie może mnie zamykać.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'zaufanie, które przychodzi mimo lęku.', s:'Najcenniejsze rzeczy nie są dla mnie łatwe.', pts:{ rey:3, jyn:1 } }
+            ]},
+            { p:'Najbardziej drażni Cię osoba, która…', h:'Wybierz to, co najszybciej wywołuje Twój opór.', a:[
+              { t:'ma władzę, ale nie bierze za nią odpowiedzialności.', s:'Wpływ bez etosu jest dla mnie pusty.', pts:{ leia:3, padme:1 } },
+              { t:'usprawiedliwia cynizm jako realizm.', s:'Nie wierzę, że trzeba tracić zasady, żeby być skuteczną.', pts:{ padme:3, rey:1 } },
+              { t:'oczekuje ślepego posłuszeństwa.', s:'Najgorzej znoszę przymus tożsamości.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'nigdy nie ryzykuje niczego prawdziwego.', s:'Nie ufam ludziom, którzy stoją z boku, gdy stawka rośnie.', pts:{ jyn:3, leia:1 } }
+            ]},
+            { p:'Nowy etap życia chciałabyś zacząć od…', h:'Wybierz odpowiedź, która brzmi jak początek Twojej historii.', a:[
+              { t:'misji większej niż ja sama.', s:'Najpełniej żyję, gdy wiem, po co coś robię.', pts:{ leia:3, padme:1 } },
+              { t:'odbudowania ładu i sensu.', s:'Chcę, żeby coś znowu miało moralny kręgosłup.', pts:{ padme:3, rey:1 } },
+              { t:'drogi, która naprawdę jest moja.', s:'Najważniejsze to nie żyć cudzym scenariuszem.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'odkrycia własnej siły mimo niepewności.', s:'Nie muszę wiedzieć wszystkiego, żeby ruszyć.', pts:{ rey:3, jyn:1 } }
+            ]}
+          ]
+        },
+        en: {
+          badge:'Quiz VI', title:'Star Wars', subtitle:'force · rebellion · loyalty · destiny', intro:'This quiz reveals which Star Wars character best matches your energy, way of acting, and moral compass.', preview:['Leia','Padmé','Ahsoka','Rey','Jyn','Sabine'],
+          characters:{
+            leia:{name:'Leia Organa',short:'Leia',image:'./leia.jpg',traits:['Leaderly','Tough','Loyal','Sharp'],desc:'You are closest to Leia if you naturally take responsibility, combine heart with political instinct, and do not run from difficult decisions.',extra:'There is fire in you, but it is not the fire of chaos. It is the energy of someone who can lead others through tension.'},
+            padme:{name:'Padmé Amidala',short:'Padmé',image:'./padme.jpg',traits:['Diplomatic','Dignified','Empathetic','Steady'],desc:'You are closest to Padmé if you value dignity, dialogue, and acting for a greater good.',extra:'There is elegance and consistency in your strength. You know that firmness does not have to mean cruelty.'},
+            ahsoka:{name:'Ahsoka Tano',short:'Ahsoka',image:'./ahsoka.jpg',traits:['Independent','Attentive','Brave','Mature'],desc:'You are closest to Ahsoka if you grow through your own choices rather than blind loyalty to institutions.',extra:'You are the kind of person who matures through the path itself. Your choices are not always easy, but they are honest.'},
+            rey:{name:'Rey',short:'Rey',image:'./rey.jpg',traits:['Intuitive','Resilient','Solitary','Luminous'],desc:'You are closest to Rey if you carry strong intuition, inner light, and a readiness to grow through uncertainty.',extra:'You do not need to know the whole map to keep moving. Something deeper than certainty often guides you.'},
+            jyn:{name:'Jyn Erso',short:'Jyn',image:'./jyn.jpg',traits:['Rebellious','Rough-edged','Effective','Loyal'],desc:'You are closest to Jyn if you do not trust grand words easily but can do something truly brave when the stakes are real.',extra:'There is resistance in you toward empty narratives. You act most powerfully when you know it truly matters.'},
+            sabine:{name:'Sabine Wren',short:'Sabine',image:'./sabine.jpg',traits:['Creative','Rebellious','Expressive','Loyal'],desc:'You are closest to Sabine if your identity is creative, defiant, and deeply personal.',extra:'You need to leave your own mark. You work best when freedom, style, and loyalty can coexist.'}
+          },
+
+          questions:[
+            { p:'You feel closest to a vision of strength that…', h:'Choose what truly speaks to you.', a:[
+              { t:'leads people and takes responsibility.', s:'Influence matters only when it serves others.', pts:{ leia:3, padme:1 } },
+              { t:'protects order without losing empathy.', s:'The hardest choices do not have to be cruel.', pts:{ padme:3, leia:1 } },
+              { t:'is born from independence and a self-chosen path.', s:'I do not want to belong blindly.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'appears when someone discovers who they are.', s:'The greatest transformation begins within.', pts:{ rey:3, jyn:1 } }
+            ]},
+            { p:'In conflict, you usually trust more in…', h:'Think of your first instinct.', a:[
+              { t:'strategy and responsibility.', s:'You have to see the whole field.', pts:{ leia:3, padme:1 } },
+              { t:'dialogue and principles.', s:'Not everything has to be decided by force.', pts:{ padme:3, ahsoka:1 } },
+              { t:'instinct and motion.', s:'Sometimes truth arrives through action.', pts:{ rey:3, ahsoka:1 } },
+              { t:'rebellion against falsehood.', s:'I do not want to pretend the system is always right.', pts:{ jyn:3, sabine:1 } }
+            ]},
+            { p:'You are most moved by a heroine who…', h:'Choose the answer that feels most like you.', a:[
+              { t:'can lead without losing humanity.', s:'Strength and tenderness can coexist.', pts:{ leia:3, padme:1 } },
+              { t:'believes in good even in a world of compromise.', s:'I do not want cynicism to poison everything.', pts:{ padme:3, rey:1 } },
+              { t:'chooses her own code instead of an assigned path.', s:'Being true to myself can matter more than belonging.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'starts from the margins but changes the course of events.', s:'The most interesting stories begin outside the center.', pts:{ jyn:2, rey:2 } }
+            ]},
+            { p:'When you enter a rigid structure, you most often…', h:'Choose the answer closest to your style of action.', a:[
+              { t:'try to change it from within.', s:'First I want to see whether it can still be saved.', pts:{ leia:2, padme:2 } },
+              { t:'keep some principles, but in your own way.', s:'I do not reject everything, I reshape the path.', pts:{ ahsoka:3, rey:1 } },
+              { t:'lose patience with it.', s:'I do not like empty hierarchy.', pts:{ jyn:3, sabine:1 } },
+              { t:'search for meaning and goodness inside it, even if fragile.', s:'I do not think everything must burn to begin again.', pts:{ padme:2, rey:2 } }
+            ]},
+            { p:'Your greatest strength is usually…', h:'Think about what people truly see in you.', a:[
+              { t:'the ability to lead others.', s:'Even under pressure, I keep direction.', pts:{ leia:3, padme:1 } },
+              { t:'dignity and calm firmness.', s:'I do not need noise to be strong.', pts:{ padme:3, leia:1 } },
+              { t:'independence and a self-made moral compass.', s:'The most important choices have to be mine.', pts:{ ahsoka:3, jyn:1 } },
+              { t:'resilience and the ability to rise again.', s:'Even after chaos, I know how to move forward.', pts:{ rey:3, sabine:1 } }
+            ]},
+            { p:'The hardest thing for you is when…', h:'Choose the answer that truly touches a nerve.', a:[
+              { t:'you have to watch others lose hope.', s:'Collective collapse hurts me deeply.', pts:{ leia:3, rey:1 } },
+              { t:'someone betrays their values for comfort.', s:'I cannot stand moral compromise for convenience.', pts:{ padme:3, leia:1 } },
+              { t:'an institution tries to take your identity from you.', s:'I do not want to be reduced to a system function.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'the world asks you for trust before you are ready.', s:'First I need to understand who I am.', pts:{ rey:3, jyn:1 } }
+            ]},
+            { p:'You are most drawn to a story about…', h:'Choose the one you would instinctively follow.', a:[
+              { t:'politics, resistance, and responsibility.', s:'The most interesting choices carry the weight of community.', pts:{ leia:3, padme:1 } },
+              { t:'faith in goodness despite the fractures of the world.', s:'That gives me the most light.', pts:{ padme:2, rey:2 } },
+              { t:'walking away from an assigned path.', s:'I am moved most by becoming yourself on your own terms.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'rebellion born from anger and loss.', s:'I believe most in transformation from the margins.', pts:{ jyn:3, rey:1 } }
+            ]},
+            { p:'In relationships, what matters most to you is…', h:'Think about what gives you the strongest sense of truth.', a:[
+              { t:'partnership in responsibility.', s:'I want to build something serious together.', pts:{ leia:3, padme:1 } },
+              { t:'a shared system of values.', s:'Without that, everything falls apart.', pts:{ padme:3, ahsoka:1 } },
+              { t:'freedom without control.', s:'Closeness cannot turn into confinement.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'trust that arrives despite fear.', s:'The most valuable things are not easy for me.', pts:{ rey:3, jyn:1 } }
+            ]},
+            { p:'You are most irritated by a person who…', h:'Choose what triggers resistance in you fastest.', a:[
+              { t:'has power but refuses responsibility.', s:'Influence without ethics feels empty.', pts:{ leia:3, padme:1 } },
+              { t:'justifies cynicism as realism.', s:'I do not believe you have to lose principles to be effective.', pts:{ padme:3, rey:1 } },
+              { t:'expects blind obedience.', s:'What I resist most is forced identity.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'never risks anything real.', s:'I do not trust people who stand aside when the stakes rise.', pts:{ jyn:3, leia:1 } }
+            ]},
+            { p:'You would like to begin a new stage of life with…', h:'Choose the answer that sounds like the opening of your story.', a:[
+              { t:'a mission larger than myself.', s:'I feel most alive when I know what something is for.', pts:{ leia:3, padme:1 } },
+              { t:'the rebuilding of order and meaning.', s:'I want something to have a moral backbone again.', pts:{ padme:3, rey:1 } },
+              { t:'a path that is truly mine.', s:'The most important thing is not to live someone else’s script.', pts:{ ahsoka:3, sabine:1 } },
+              { t:'discovering my own strength through uncertainty.', s:'I do not need to know everything to begin.', pts:{ rey:3, jyn:1 } }
+            ]}
+          ]
+        }
+      },
+      f1: {
+        previewLimit: 6,
+        dualResult: true,
+        dualRoleKey: 'roles',
+        pl: {
+          badge:'Quiz VII', title:'F1', subtitle:'tempo · strategia · presja · zespół', intro:'Ten quiz daje dwa wyniki naraz. Najpierw pokaże, do którego zespołu Formuły 1 jest Ci najbliżej, a potem odsłoni, jaką rolę pełniłabyś w padoku.', preview:['Ferrari','Mercedes','McLaren','Red Bull','Aston Martin','Williams'],
+          roleLabel:'Twoja rola',
+          roleLead:'W świecie F1 najbardziej pasowałaby do Ciebie ta funkcja:',
+          characters:{
+            ferrari:{name:'Scuderia Ferrari',short:'Ferrari',image:'./ferrari.jpg',traits:['Emocja','Historia','Presja','Pasja'],desc:'Najbliżej Ci do Ferrari, jeśli działasz intensywnie, mocno przeżywasz stawkę i masz w sobie mieszankę romantyzmu, dumy i wysokich oczekiwań.',extra:'Nie jesteś opcją neutralną. Twoja energia jest wyrazista, pamiętliwa i głęboko związana z wagą znaczenia.'},
+            mercedes:{name:'Mercedes',short:'Mercedes',image:'./mercedes.jpg',traits:['Precyzja','Kontrola','Profesjonalizm','Chłód'],desc:'Najbliżej Ci do Mercedesa, jeśli cenisz sprawność, strukturę i kompetencję bardziej niż widowiskowy chaos.',extra:'Lubisz działać tak, by jakość była widoczna w szczególe. Twoją siłą jest powtarzalność na wysokim poziomie.'},
+            mclaren:{name:'McLaren',short:'McLaren',image:'./mclaren.jpg',traits:['Świeżość','Energia','Zespół','Rozwój'],desc:'Najbliżej Ci do McLarena, jeśli łączysz ambicję z lekkością, a rozwój i dobra dynamika zespołu są dla Ciebie równie ważne jak wynik.',extra:'Masz w sobie ruch do przodu i potrzebę budowania czegoś, co jest jednocześnie poważne i żywe.'},
+            redbull:{name:'Red Bull Racing',short:'Red Bull',image:'./redbull.jpg',traits:['Bezkompromisowość','Tempo','Pewność','Ostrość'],desc:'Najbliżej Ci do Red Bulla, jeśli najlepiej czujesz się tam, gdzie liczy się szybkość decyzji, przewaga i bezwzględna skuteczność.',extra:'Nie boisz się rywalizacji ani wyraźnych hierarchii. Wchodzisz w grę po to, żeby naprawdę wygrać.'},
+            aston:{name:'Aston Martin',short:'Aston Martin',image:'./aston.jpg',traits:['Styl','Ambicja','Wizerunek','Próba'],desc:'Najbliżej Ci do Astona Martina, jeśli ważne są dla Ciebie aspiracja, estetyka i budowanie czegoś, co ma wyglądać jak projekt z rozmachem.',extra:'Masz w sobie elegancję połączoną z pragnieniem wzrostu. Interesuje Cię nie tylko efekt, ale też aura wokół niego.'},
+            williams:{name:'Williams',short:'Williams',image:'./williams.jpg',traits:['Tradycja','Wytrwałość','Odbudowa','Godność'],desc:'Najbliżej Ci do Williamsa, jeśli cenisz odporność, historię i cichą determinację bardziej niż chwilowy blask.',extra:'Jesteś typem osoby, która nie musi dominować narracji, żeby mieć ciężar i znaczenie.'}
+          },
+          roles:{
+            kierowca:{name:'Kierowczyni',short:'Kierowczyni',traits:['Tempo','Decyzja','Instynkt'],desc:'Najlepiej działasz na pierwszej linii napięcia. Lubisz sprawczość, szybkie reakcje i bezpośrednie mierzenie się ze stawką.',extra:'To rola dla osoby, która chce czuć ruch, ryzyko i wpływ w czasie rzeczywistym.'},
+            strateg:{name:'Strategini',short:'Strategini',traits:['Układ','Czytanie wyścigu','Plan'],desc:'Twoją mocną stroną jest widzenie całości i układanie decyzji kilka kroków naprzód.',extra:'Najlepiej działasz tam, gdzie trzeba połączyć dane, intuicję i timing.'},
+            inzynier:{name:'Inżynierka osiągów',short:'Inżynierka osiągów',traits:['Analiza','Precyzja','Ulepszanie'],desc:'Lubisz poprawiać, kalibrować i wydobywać maksimum z systemu. Szczegół nie jest dla Ciebie drobiazgiem, tylko językiem jakości.',extra:'Ta rola pasuje do osoby, która ufa strukturze i pracy u podstaw.'},
+            principal:{name:'Szefowa zespołu',short:'Szefowa zespołu',traits:['Przywództwo','Presja','Odpowiedzialność'],desc:'Masz energię osoby, która spina całość i bierze odpowiedzialność za wynik zbiorowy.',extra:'To pozycja dla kogoś, kto łączy ludzi, napięcia i interesy w jeden kierunek.'},
+            media:{name:'Twarz mediów',short:'Twarz mediów',traits:['Narracja','Komunikacja','Wizerunek'],desc:'Dobrze czujesz, że F1 to nie tylko wynik, ale też opowieść. Umiesz nadawać sens, ton i emocjonalne ramy temu, co się dzieje.',extra:'Ta funkcja pasuje do osoby, która rozumie ludzi tak samo dobrze jak widowisko.'},
+            akademia:{name:'Młoda talentka akademii',short:'Talentka akademii',traits:['Rozwój','Potencjał','Uczenie się'],desc:'Najbliżej Ci do roli osoby, która jeszcze rośnie, ale już ma wyraźny kierunek i ogromny potencjał.',extra:'To energia przyszłości, nauki i budowania siebie w ruchu.'}
+          },
+
+          questions:[
+            { p:'Najlepszy zespół to dla Ciebie taki, który…', h:'Wybierz odpowiedź najbliższą Twojemu odruchowi.', a:[
+              { t:'ma historię, emocję i ciężar znaczenia.', s:'Ważne jest nie tylko co wygrywa, ale co znaczy.', pts:{ ferrari:3, williams:1 }, rolePts:{ media:2, principal:2 } },
+              { t:'działa czysto, sprawnie i bez zbędnego chaosu.', s:'Profesjonalizm to też estetyka.', pts:{ mercedes:3, mclaren:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'rośnie, odświeża się i ma dobrą energię ludzi.', s:'Rozwój zespołu jest fascynujący.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:2, media:2 } },
+              { t:'po prostu dowozi przewagę.', s:'Liczy się skuteczność i tempo decyzji.', pts:{ redbull:3, mercedes:1 }, rolePts:{ kierowca:2, strateg:2 } }
+            ]},
+            { p:'Pod presją najczęściej…', h:'Pomyśl o tym, jak działasz naprawdę.', a:[
+              { t:'wchodzisz w tryb wykonania.', s:'Nie rozmieniam się wtedy na drobne.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:3, principal:1 } },
+              { t:'porządkujesz chaos i szukasz planu.', s:'Najlepiej pracuję, gdy widzę układ.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:3, inzynier:1 } },
+              { t:'spinasz ludzi i utrzymujesz kierunek.', s:'Ktoś musi trzymać całość.', pts:{ ferrari:2, aston:2 }, rolePts:{ principal:3, media:1 } },
+              { t:'analizujesz, co można poprawić.', s:'Zawsze da się coś doprecyzować.', pts:{ williams:2, mercedes:2 }, rolePts:{ inzynier:3, akademia:1 } }
+            ]},
+            { p:'Najbliżej Ci do środowiska, w którym…', h:'Wybierz odpowiedź najbardziej „Twoją”.', a:[
+              { t:'emocje są wielkie, a stawka naprawdę czuć.', s:'Lubię, gdy coś ma ciężar.', pts:{ ferrari:3, aston:1 }, rolePts:{ media:3, kierowca:1 } },
+              { t:'wszystko opiera się na standardzie i jakości.', s:'Dobrze czuję się w strukturze.', pts:{ mercedes:3, redbull:1 }, rolePts:{ inzynier:2, strateg:2 } },
+              { t:'jest miejsce na rozwój, świeżość i nową energię.', s:'Lubię środowiska, które rosną.', pts:{ mclaren:3, williams:1 }, rolePts:{ akademia:3, media:1 } },
+              { t:'trzeba odbudowywać, ufać procesowi i nie pękać.', s:'Wytrwałość robi na mnie wielkie wrażenie.', pts:{ williams:3, aston:1 }, rolePts:{ principal:2, akademia:2 } }
+            ]},
+            { p:'Najbardziej cenisz w pracy zespołowej to, że…', h:'Wybierz odpowiedź, która jest Ci najbliższa.', a:[
+              { t:'każdy wie, o co gra i jaka jest stawka.', s:'Jasność celu porządkuje napięcie.', pts:{ redbull:2, ferrari:2 }, rolePts:{ principal:3, kierowca:1 } },
+              { t:'drobne elementy składają się na wielki efekt.', s:'Szczegół buduje przewagę.', pts:{ mercedes:3, williams:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'ludzie naprawdę rosną razem.', s:'Lubię obserwować rozwój wewnątrz projektu.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:3, media:1 } },
+              { t:'nawet pod presją da się utrzymać narrację i sens.', s:'To, jak się komunikuje, ma znaczenie.', pts:{ ferrari:3, aston:1 }, rolePts:{ media:3, principal:1 } }
+            ]},
+            { p:'Najmocniej działa na Ciebie zespół, który…', h:'Pomyśl bardziej o energii niż o tabeli.', a:[
+              { t:'budzi ogromne emocje i oczekiwania.', s:'Lubię projekty, które coś znaczą kulturowo.', pts:{ ferrari:3, williams:1 }, rolePts:{ media:3, principal:1 } },
+              { t:'wydaje się niemal klinicznie skuteczny.', s:'Podziwiam kompetencję bez zbędnego teatru.', pts:{ mercedes:3, redbull:1 }, rolePts:{ inzynier:2, strateg:2 } },
+              { t:'ma poczucie świeżości i nowego otwarcia.', s:'Dobrze czuję się przy energii wzrostu.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:2, media:2 } },
+              { t:'walczy z ograniczeniami i odzyskuje pozycję.', s:'Najbardziej szanuję cierpliwą odbudowę.', pts:{ williams:3, aston:1 }, rolePts:{ principal:2, akademia:2 } }
+            ]},
+            { p:'Gdy musisz podjąć decyzję szybko, zwykle…', h:'Wybierz odpowiedź najbliższą rzeczywistości.', a:[
+              { t:'decydujesz instynktownie i bierzesz to na siebie.', s:'Ważne, żeby ruch był pewny.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:3, principal:1 } },
+              { t:'układasz w głowie warianty.', s:'Najpierw chcę zobaczyć konsekwencje.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:3, inzynier:1 } },
+              { t:'myślisz, kto jeszcze musi być w to włączony.', s:'Dobra decyzja musi być osadzona w zespole.', pts:{ aston:2, ferrari:2 }, rolePts:{ principal:3, media:1 } },
+              { t:'szukasz tego, co można usprawnić już na następnym kroku.', s:'Nawet szybki ruch powinien czegoś uczyć.', pts:{ mclaren:2, mercedes:2 }, rolePts:{ akademia:2, inzynier:2 } }
+            ]},
+            { p:'Najbliższa jest Ci rola osoby, która…', h:'Wybierz funkcję, która najbardziej Cię pociąga.', a:[
+              { t:'czuje wyścig z pierwszej linii napięcia.', s:'Najmocniej działa na mnie bezpośrednia stawka.', pts:{ redbull:2, ferrari:2 }, rolePts:{ kierowca:3, media:1 } },
+              { t:'widzi układ kilka ruchów wcześniej.', s:'Najbardziej fascynuje mnie czytanie całego wyścigu.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:3, inzynier:1 } },
+              { t:'wydobywa maksimum z detalu i procesu.', s:'Poprawa systemu jest dla mnie ekscytująca.', pts:{ mercedes:2, mclaren:2 }, rolePts:{ inzynier:3, akademia:1 } },
+              { t:'spina ludzi, presję i wynik w jedną całość.', s:'Największa siła to trzymanie projektu razem.', pts:{ ferrari:3, aston:1 }, rolePts:{ principal:3, media:1 } }
+            ]},
+            { p:'Najbardziej drażni Cię w sporcie to, gdy…', h:'Wybierz odpowiedź, która najmocniej Cię dotyka.', a:[
+              { t:'wielka historia nie idzie za jakością wykonania.', s:'Sama legenda nie wystarcza.', pts:{ ferrari:2, williams:2 }, rolePts:{ inzynier:2, principal:2 } },
+              { t:'wszystko jest poprawne, ale bez życia.', s:'Sama skuteczność bez energii mnie nie porywa.', pts:{ aston:2, mclaren:2 }, rolePts:{ media:3, akademia:1 } },
+              { t:'zespół marnuje przewagę przez brak odwagi.', s:'Czasem trzeba po prostu zaryzykować.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:3, strateg:1 } },
+              { t:'nikt nie myśli długofalowo.', s:'Brak procesu szybko się mści.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:2, inzynier:2 } }
+            ]},
+            { p:'Które zdanie brzmi najbardziej jak Ty?', h:'Wybierz to, które najlepiej oddaje Twój sposób działania.', a:[
+              { t:'Wolę intensywność niż obojętność.', s:'Nawet chaos jest lepszy niż pustka.', pts:{ ferrari:3, redbull:1 }, rolePts:{ media:2, kierowca:2 } },
+              { t:'Jakość rodzi się z dyscypliny.', s:'Nie wierzę w przypadkową wielkość.', pts:{ mercedes:3, williams:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'Najciekawsze jest budowanie czegoś, co rośnie.', s:'Lubię widzieć ruch i potencjał.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:3, principal:1 } },
+              { t:'Prawdziwa siła to umieć utrzymać całość pod presją.', s:'Nie interesuje mnie tylko mój wynik, ale cały układ.', pts:{ aston:2, ferrari:2 }, rolePts:{ principal:3, media:1 } }
+            ]},
+            { p:'Nowy rozdział w świecie F1 najchętniej zaczęłabyś jako…', h:'Wybierz początek, który brzmi najbardziej kusząco.', a:[
+              { t:'część legendarnego projektu z ogromną stawką.', s:'Lubię, gdy coś od początku ma ciężar historii.', pts:{ ferrari:3, williams:1 }, rolePts:{ media:2, principal:2 } },
+              { t:'osoba w zespole, który działa perfekcyjnie od środka.', s:'Najbardziej pociąga mnie kompetencja.', pts:{ mercedes:3, redbull:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'młoda talentka w miejscu, które naprawdę się rozwija.', s:'Najmocniej działa na mnie energia wzrostu.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:3, media:1 } },
+              { t:'ktoś, kto w środku presji podejmuje decydujące ruchy.', s:'Najbardziej ożywia mnie stawka i wpływ.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:2, principal:2 } }
+            ]}
+          ]
+        },
+        en: {
+          badge:'Quiz VII', title:'F1', subtitle:'pace · strategy · pressure · team', intro:'This quiz gives you two results at once. First, it shows which Formula 1 team you are closest to, then it reveals the role you would most likely play in the paddock.', preview:['Ferrari','Mercedes','McLaren','Red Bull','Aston Martin','Williams'],
+          roleLabel:'Your role',
+          roleLead:'In the world of F1, this function would suit you best:',
+          characters:{
+            ferrari:{name:'Scuderia Ferrari',short:'Ferrari',image:'./ferrari.jpg',traits:['Emotion','History','Pressure','Passion'],desc:'You are closest to Ferrari if you act intensely, feel the stakes deeply, and carry a mix of romanticism, pride, and high expectations.',extra:'You are not a neutral option. Your energy is vivid, memorable, and deeply tied to significance.'},
+            mercedes:{name:'Mercedes',short:'Mercedes',image:'./mercedes.jpg',traits:['Precision','Control','Professionalism','Coolness'],desc:'You are closest to Mercedes if you value efficiency, structure, and competence more than spectacular chaos.',extra:'You like to work in a way where quality shows in the details. Your strength is consistency at a high level.'},
+            mclaren:{name:'McLaren',short:'McLaren',image:'./mclaren.jpg',traits:['Freshness','Energy','Team spirit','Growth'],desc:'You are closest to McLaren if you combine ambition with lightness and value growth and team dynamics as much as the result itself.',extra:'There is movement in you and a wish to build something that feels both serious and alive.'},
+            redbull:{name:'Red Bull Racing',short:'Red Bull',image:'./redbull.jpg',traits:['Relentlessness','Pace','Confidence','Sharpness'],desc:'You are closest to Red Bull if you feel most at home where speed of decision, edge, and ruthless effectiveness matter most.',extra:'You do not fear competition or clear hierarchies. You enter the game to actually win it.'},
+            aston:{name:'Aston Martin',short:'Aston Martin',image:'./aston.jpg',traits:['Style','Ambition','Image','Attempt'],desc:'You are closest to Aston Martin if aspiration, aesthetics, and building something with visible scale matter to you.',extra:'There is elegance in you combined with a desire for growth. You care not only about the result but about the aura around it.'},
+            williams:{name:'Williams',short:'Williams',image:'./williams.jpg',traits:['Tradition','Endurance','Rebuilding','Dignity'],desc:'You are closest to Williams if you value resilience, history, and quiet determination more than momentary shine.',extra:'You are the kind of person who does not need to dominate the narrative to still carry weight and meaning.'}
+          },
+          roles:{
+            kierowca:{name:'Driver',short:'Driver',traits:['Pace','Decision','Instinct'],desc:'You work best on the front line of tension. You like agency, fast reactions, and meeting the stakes directly.',extra:'This role suits someone who wants to feel movement, risk, and impact in real time.'},
+            strateg:{name:'Strategist',short:'Strategist',traits:['Structure','Race reading','Plan'],desc:'Your greatest strength is seeing the whole picture and arranging decisions several steps ahead.',extra:'You work best where data, intuition, and timing have to be fused.'},
+            inzynier:{name:'Performance Engineer',short:'Performance Engineer',traits:['Analysis','Precision','Refinement'],desc:'You like improving, calibrating, and extracting the maximum from a system. Detail is not trivial to you — it is the language of quality.',extra:'This role fits someone who trusts structure and foundational work.'},
+            principal:{name:'Team Principal',short:'Team Principal',traits:['Leadership','Pressure','Responsibility'],desc:'You have the energy of someone who holds the whole structure together and takes responsibility for the collective result.',extra:'This is a position for someone who can combine people, tension, and competing interests into one direction.'},
+            media:{name:'Media Face',short:'Media Face',traits:['Narrative','Communication','Image'],desc:'You sense that F1 is not only a result but also a story. You can give meaning, tone, and emotional framing to what happens.',extra:'This function suits someone who understands people just as well as spectacle.'},
+            akademia:{name:'Academy Prospect',short:'Academy Prospect',traits:['Growth','Potential','Learning'],desc:'You are closest to the role of someone who is still growing but already has direction and a strong sense of potential.',extra:'This is the energy of future, learning, and building yourself in motion.'}
+          },
+
+          questions:[
+            { p:'The best team for you is one that…', h:'Choose the answer closest to your instinct.', a:[
+              { t:'has history, emotion, and the weight of meaning.', s:'It matters not only what wins, but what it means.', pts:{ ferrari:3, williams:1 }, rolePts:{ media:2, principal:2 } },
+              { t:'operates cleanly, efficiently, and without needless chaos.', s:'Professionalism can be a form of aesthetics too.', pts:{ mercedes:3, mclaren:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'keeps growing, renewing itself, and has good human energy.', s:'Team development fascinates me.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:2, media:2 } },
+              { t:'simply delivers an edge.', s:'Effectiveness and speed of decision matter most.', pts:{ redbull:3, mercedes:1 }, rolePts:{ kierowca:2, strateg:2 } }
+            ]},
+            { p:'Under pressure, you most often…', h:'Think of how you really act.', a:[
+              { t:'switch into execution mode.', s:'I do not fragment when it matters.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:3, principal:1 } },
+              { t:'organize the chaos and look for a plan.', s:'I work best when I can see the structure.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:3, inzynier:1 } },
+              { t:'hold people together and keep direction.', s:'Someone has to keep the whole thing aligned.', pts:{ ferrari:2, aston:2 }, rolePts:{ principal:3, media:1 } },
+              { t:'analyze what can be improved.', s:'There is always something to refine.', pts:{ williams:2, mercedes:2 }, rolePts:{ inzynier:3, akademia:1 } }
+            ]},
+            { p:'You feel closest to an environment where…', h:'Choose the answer that feels most like you.', a:[
+              { t:'the emotions are big and the stakes feel real.', s:'I like when something has emotional weight.', pts:{ ferrari:3, aston:1 }, rolePts:{ media:3, kierowca:1 } },
+              { t:'everything is built on standard and quality.', s:'I feel good inside structure.', pts:{ mercedes:3, redbull:1 }, rolePts:{ inzynier:2, strateg:2 } },
+              { t:'there is room for growth, freshness, and new energy.', s:'I like environments that are still rising.', pts:{ mclaren:3, williams:1 }, rolePts:{ akademia:3, media:1 } },
+              { t:'you have to rebuild, trust the process, and not break.', s:'Endurance impresses me deeply.', pts:{ williams:3, aston:1 }, rolePts:{ principal:2, akademia:2 } }
+            ]},
+            { p:'What do you value most in teamwork?', h:'Choose the answer that feels closest to you.', a:[
+              { t:'Everyone knows the goal and the stakes.', s:'Clarity gives shape to pressure.', pts:{ redbull:2, ferrari:2 }, rolePts:{ principal:3, kierowca:1 } },
+              { t:'Small elements build a great effect.', s:'Detail creates advantage.', pts:{ mercedes:3, williams:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'People truly grow together.', s:'I like watching development inside a project.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:3, media:1 } },
+              { t:'Even under pressure, a team can keep meaning and narrative.', s:'The way things are communicated matters.', pts:{ ferrari:3, aston:1 }, rolePts:{ media:3, principal:1 } }
+            ]},
+            { p:'You respond most strongly to a team that…', h:'Think more about energy than points tables.', a:[
+              { t:'awakens huge emotion and expectation.', s:'I like projects with cultural weight.', pts:{ ferrari:3, williams:1 }, rolePts:{ media:3, principal:1 } },
+              { t:'feels almost clinically effective.', s:'I admire competence without unnecessary theatre.', pts:{ mercedes:3, redbull:1 }, rolePts:{ inzynier:2, strateg:2 } },
+              { t:'has freshness and a sense of renewal.', s:'Growth energy works on me strongly.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:2, media:2 } },
+              { t:'fights limits and rebuilds its position.', s:'I respect patient rebuilding the most.', pts:{ williams:3, aston:1 }, rolePts:{ principal:2, akademia:2 } }
+            ]},
+            { p:'When you have to decide quickly, you usually…', h:'Choose the answer closest to reality.', a:[
+              { t:'decide instinctively and take ownership.', s:'The move has to feel committed.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:3, principal:1 } },
+              { t:'arrange scenarios in your head.', s:'First I want to see the consequences.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:3, inzynier:1 } },
+              { t:'think about who else has to be included.', s:'A good decision has to be grounded in the team.', pts:{ aston:2, ferrari:2 }, rolePts:{ principal:3, media:1 } },
+              { t:'look for what can be improved on the next step.', s:'Even a fast move should teach something.', pts:{ mclaren:2, mercedes:2 }, rolePts:{ akademia:2, inzynier:2 } }
+            ]},
+            { p:'You feel closest to the role of someone who…', h:'Choose the function that attracts you most.', a:[
+              { t:'feels the race from the front line of tension.', s:'Direct stakes affect me most strongly.', pts:{ redbull:2, ferrari:2 }, rolePts:{ kierowca:3, media:1 } },
+              { t:'sees the structure several moves ahead.', s:'Reading the entire race fascinates me most.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:3, inzynier:1 } },
+              { t:'extracts the maximum from detail and process.', s:'System refinement excites me.', pts:{ mercedes:2, mclaren:2 }, rolePts:{ inzynier:3, akademia:1 } },
+              { t:'holds people, pressure, and result together.', s:'The greatest strength is keeping the project coherent.', pts:{ ferrari:3, aston:1 }, rolePts:{ principal:3, media:1 } }
+            ]},
+            { p:'What irritates you most in sport is when…', h:'Choose the answer that hits you most deeply.', a:[
+              { t:'great history is not matched by execution quality.', s:'Legend alone is never enough.', pts:{ ferrari:2, williams:2 }, rolePts:{ inzynier:2, principal:2 } },
+              { t:'everything is correct but lifeless.', s:'Efficiency alone does not move me.', pts:{ aston:2, mclaren:2 }, rolePts:{ media:3, akademia:1 } },
+              { t:'a team wastes an advantage through lack of courage.', s:'Sometimes you simply have to risk it.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:3, strateg:1 } },
+              { t:'nobody thinks long-term.', s:'Lack of process always comes back to hurt.', pts:{ mercedes:3, williams:1 }, rolePts:{ strateg:2, inzynier:2 } }
+            ]},
+            { p:'Which sentence sounds most like you?', h:'Choose the one that best captures your way of acting.', a:[
+              { t:'I prefer intensity to indifference.', s:'Even chaos is better than emptiness.', pts:{ ferrari:3, redbull:1 }, rolePts:{ media:2, kierowca:2 } },
+              { t:'Quality is born from discipline.', s:'I do not believe in accidental greatness.', pts:{ mercedes:3, williams:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'The most exciting thing is building something that grows.', s:'I like seeing movement and potential.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:3, principal:1 } },
+              { t:'Real strength is holding the whole together under pressure.', s:'I care not only about my own result, but about the whole structure.', pts:{ aston:2, ferrari:2 }, rolePts:{ principal:3, media:1 } }
+            ]},
+            { p:'You would most like to begin a new F1 chapter as…', h:'Choose the opening that sounds most tempting.', a:[
+              { t:'part of a legendary project with enormous stakes.', s:'I like when something carries history from the start.', pts:{ ferrari:3, williams:1 }, rolePts:{ media:2, principal:2 } },
+              { t:'someone inside a team that works perfectly from within.', s:'Competence attracts me most.', pts:{ mercedes:3, redbull:1 }, rolePts:{ inzynier:3, strateg:1 } },
+              { t:'a young talent in a place that is truly developing.', s:'Growth energy affects me most strongly.', pts:{ mclaren:3, aston:1 }, rolePts:{ akademia:3, media:1 } },
+              { t:'someone making decisive moves in the middle of pressure.', s:'What energizes me most is stakes and impact.', pts:{ redbull:3, ferrari:1 }, rolePts:{ kierowca:2, principal:2 } }
+            ]}
+          ]
+        }
+      }
+    
+    };
+
+    let lang = 'pl';
+    let theme = 'light';
+    let activeQuizKey = null;
+    let currentQuestion = 0;
+    let scores = {};
+
+    const universeGrid = document.getElementById('universe-grid');
+    const introBadge = document.getElementById('intro-badge');
+    const introTitle = document.getElementById('intro-title');
+    const introLead = document.getElementById('intro-lead');
+    const introCharacters = document.getElementById('intro-characters');
+
+    function t(key, vars = {}){
+      let str = UI[lang][key] || '';
+      Object.entries(vars).forEach(([k,v]) => { str = str.replaceAll(`{${k}}`, v); });
+      return str;
+    }
+
+    function getQuizData(key){ return QUIZZES[key][lang]; }
+    function getActiveQuiz(){ return activeQuizKey ? QUIZZES[activeQuizKey][lang] : null; }
+    function safeLabel(name){ return name.split(' ')[0]; }
+
+    function setLanguage(next){
+      lang = next;
+      document.documentElement.lang = next;
+      document.title = UI[lang].title;
+      document.getElementById('brand-label').textContent = UI[lang].brand;
+      document.getElementById('home-eyebrow').textContent = UI[lang].homeEyebrow;
+      document.getElementById('home-title').textContent = UI[lang].homeTitle;
+      document.getElementById('home-lead').textContent = UI[lang].homeLead;
+      document.getElementById('start-btn').textContent = UI[lang].start;
+      document.getElementById('back-btn').textContent = UI[lang].back;
+      document.getElementById('score-title').textContent = UI[lang].scoreTitle;
+      const roleTitleEl = document.getElementById('role-title');
+      const roleLeadEl = document.getElementById('role-lead');
+      if(roleTitleEl && roleLeadEl){
+        const activeQuiz = getActiveQuiz();
+        if(activeQuiz && activeQuiz.roles){
+          roleTitleEl.textContent = activeQuiz.roleLabel || 'Your role';
+          roleLeadEl.textContent = activeQuiz.roleLead || '';
+        }
+      }
+      document.getElementById('restart-btn').textContent = UI[lang].replay;
+      document.getElementById('choose-btn').textContent = UI[lang].chooseAnother;
+      document.getElementById('theme-light').textContent = UI[lang].light;
+      document.getElementById('theme-dark').textContent = UI[lang].dark;
+      document.getElementById('lang-pl').classList.toggle('active', next === 'pl');
+      document.getElementById('lang-en').classList.toggle('active', next === 'en');
+      renderHome();
+      if(activeQuizKey){
+        renderIntro();
+        if(document.getElementById('step-quiz').classList.contains('active')) renderQuestion();
+        if(document.getElementById('step-result').classList.contains('active')) showResult();
+      }
+    }
+
+    function setTheme(next){
+      theme = next;
+      document.body.setAttribute('data-theme', next);
+      document.getElementById('theme-light').classList.toggle('active', next === 'light');
+      document.getElementById('theme-dark').classList.toggle('active', next === 'dark');
+    }
+
+    function setUniverseTheme(key){
+      document.body.setAttribute('data-universe', key || 'home');
+    }
+
+    function renderHome(){
+      universeGrid.innerHTML = Object.entries(QUIZZES).map(([key, val]) => {
+        const quiz = val[lang];
+        return `
+          <div class="universe-card" onclick="openIntro('${key}')">
+            <div>
+              <div class="universe-badge">${quiz.badge}</div>
+              <h3 class="universe-title">${quiz.title}</h3>
+              <p class="universe-subtitle">${quiz.subtitle}</p>
+            </div>
+            <div class="chip-row">${quiz.preview.map(item => `<span class="chip">${item}</span>`).join('')}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function goTo(stepId){
+      document.querySelectorAll('.step').forEach(step => step.classList.remove('active'));
+      document.getElementById(stepId).classList.add('active');
+      window.scrollTo({ top:0, behavior:'smooth' });
+    }
+
+    function handleMissingImage(img){
+      const portrait = img.closest('.portrait');
+      if(portrait){ portrait.classList.add('missing'); }
+      img.style.display = 'none';
+    }
+
+    function renderIntro(){
+      const activeQuiz = getActiveQuiz();
+      if(!activeQuiz) return;
+      introBadge.textContent = activeQuiz.badge;
+      introTitle.textContent = activeQuiz.title;
+      introLead.textContent = activeQuiz.intro;
+      const previewChars = Object.values(activeQuiz.characters).slice(0, 4);
+      introCharacters.innerHTML = previewChars.map(char => `
+        <div class="character-card">
+          <div class="portrait" data-label="${safeLabel(char.name)}">
+            <img src="${char.image}" alt="${char.name}" onerror="handleMissingImage(this)">
+          </div>
+          <div class="character-name">${safeLabel(char.name)}</div>
+        </div>
+      `).join('');
+    }
+
+    function openIntro(quizKey){
+      activeQuizKey = quizKey;
+      setUniverseTheme(quizKey);
+      renderIntro();
+      goTo('step-intro');
+    }
+
+    let roleScores = {};
+
+    function resetScores(){
+      scores = {};
+      roleScores = {};
+      const activeQuiz = getActiveQuiz();
+      Object.keys(activeQuiz.characters).forEach(key => scores[key] = 0);
+      if(activeQuiz.roles){
+        Object.keys(activeQuiz.roles).forEach(key => roleScores[key] = 0);
+      }
+    }
+
+    function startQuiz(){
+      currentQuestion = 0;
+      resetScores();
+      renderQuestion();
+      goTo('step-quiz');
+    }
+
+    function renderQuestion(){
+      const activeQuiz = getActiveQuiz();
+      const q = activeQuiz.questions[currentQuestion];
+      const total = activeQuiz.questions.length;
+      const pct = Math.round((currentQuestion / total) * 100);
+
+      document.getElementById('q-counter').textContent = t('questionOf', { current: currentQuestion + 1, total });
+      document.getElementById('q-pct').textContent = `${pct}%`;
+      document.getElementById('progress-fill').style.width = `${pct}%`;
+
+      document.getElementById('question-area').innerHTML = `
+        <div class="q-label">${t('questionLabel', { title: activeQuiz.title, current: currentQuestion + 1 })}</div>
+        <div class="q-title">${q.p}</div>
+        <p class="q-hint">${q.h}</p>
+        <div class="answers">
+          ${q.a.map((answer, i) => `
+            <button class="answer" onclick="pickAnswer(${i})">
+              ${answer.t}
+              <span>${answer.s}</span>
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function pickAnswer(index){
+      const activeQuiz = getActiveQuiz();
+      const answer = activeQuiz.questions[currentQuestion].a[index];
+      Object.entries(answer.pts).forEach(([key, val]) => { scores[key] += val; });
+      currentQuestion += 1;
+      if(currentQuestion < activeQuiz.questions.length){ renderQuestion(); }
+      else { showResult(); }
+    }
+
+    function showResult(){
+      const activeQuiz = getActiveQuiz();
+      const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+      const [winnerKey, winnerScore] = sorted[0];
+      const winner = activeQuiz.characters[winnerKey];
+      const tie = sorted[1] && sorted[1][1] === winnerScore;
+
+      document.getElementById('result-badge').textContent = t('resultLabel', { title: activeQuiz.title });
+      document.getElementById('result-name').textContent = winner.name;
+      document.getElementById('result-desc').textContent = winner.desc;
+      document.getElementById('result-extra').textContent = winner.extra + (tie ? t('tieText') : t('resultText'));
+      document.getElementById('result-traits').innerHTML = winner.traits.map(trait => `<span class="trait">${trait}</span>`).join('');
+
+      const portrait = document.getElementById('result-portrait');
+      const resultImg = document.getElementById('result-img');
+      portrait.classList.remove('missing');
+      portrait.setAttribute('data-label', safeLabel(winner.name));
+      resultImg.style.display = 'block';
+      resultImg.src = winner.image;
+      resultImg.alt = winner.name;
+
+      const roleBox = document.getElementById('role-box');
+      if(activeQuiz.roles && Object.keys(roleScores).length){
+        const sortedRoles = Object.entries(roleScores).sort((a,b) => b[1] - a[1]);
+        const roleWinner = activeQuiz.roles[sortedRoles[0][0]];
+        roleBox.style.display = "block";
+        document.getElementById('role-title').textContent = activeQuiz.roleLabel || "Your role";
+        document.getElementById('role-name').textContent = roleWinner.name;
+        document.getElementById('role-lead').textContent = activeQuiz.roleLead || "";
+        document.getElementById('role-desc').textContent = roleWinner.desc;
+        document.getElementById('role-traits').innerHTML = roleWinner.traits.map(trait => `<span class="trait">${trait}</span>`).join("");
+        document.getElementById('role-extra').textContent = roleWinner.extra;
+      } else {
+        roleBox.style.display = "none";
+      }
+
+      const maxScore = Math.max(...Object.values(scores), 1);
+      document.getElementById('score-list').innerHTML = sorted.map(([key, val]) => {
+        const width = Math.max(8, (val / maxScore) * 100);
+        return `
+          <div class="score-item">
+            <div class="score-head"><strong>${activeQuiz.characters[key].short}</strong><span>${val} ${t('points')}</span></div>
+            <div class="score-track"><div class="score-fill" style="width:${width}%"></div></div>
+          </div>
+        `;
+      }).join('');
+
+      goTo('step-result');
+    }
+
+    function restartCurrentQuiz(){ if(activeQuizKey) startQuiz(); }
+    function goHome(){ activeQuizKey = null; setUniverseTheme('home'); goTo('step-home'); }
+
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(prefersDark ? 'dark' : 'light');
+    setLanguage('pl');
+    setUniverseTheme('home');
+  </script>
+</body>
+</html>
